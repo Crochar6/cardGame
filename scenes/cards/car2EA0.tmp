@@ -1,0 +1,122 @@
+[gd_scene load_steps=11 format=3 uid="uid://cuqlavx8xtrbg"]
+
+[ext_resource type="Shader" path="res://shaders/fake_3D.gdshader" id="1_k70li"]
+[ext_resource type="Script" path="res://scripts/card.gd" id="1_ybnx8"]
+[ext_resource type="Texture2D" uid="uid://dgtlswlhyhihw" path="res://assets/blank.png" id="2_vsb4h"]
+[ext_resource type="FontFile" uid="uid://ct5rm3ufddi78" path="res://fonts/dpcomic.ttf" id="4_fi4g1"]
+[ext_resource type="PackedScene" uid="uid://bmynt0nrt01by" path="res://scenes/energy_icon.tscn" id="5_iwpef"]
+[ext_resource type="PackedScene" uid="uid://ctmfy1uhxxmgj" path="res://scenes/components/drag_component.tscn" id="6_6hirc"]
+[ext_resource type="PackedScene" uid="uid://mp6mlgob3v33" path="res://scenes/components/hover_component.tscn" id="7_a84gg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jq80f"]
+size = Vector2(61, 97)
+
+[sub_resource type="Theme" id="Theme_bnust"]
+default_font = ExtResource("4_fi4g1")
+default_font_size = 12
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d8ql3"]
+resource_local_to_scene = true
+shader = ExtResource("1_k70li")
+shader_parameter/fov = 90.0
+shader_parameter/cull_back = true
+shader_parameter/y_rot = 0.0
+shader_parameter/x_rot = 0.0
+shader_parameter/inset = 0.0
+
+[node name="Card" type="Control"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 69.0
+offset_bottom = 105.0
+pivot_offset = Vector2(34, 33)
+mouse_filter = 2
+script = ExtResource("1_ybnx8")
+
+[node name="DragComponent" parent="." node_paths=PackedStringArray("drag_button") instance=ExtResource("6_6hirc")]
+drag_button = NodePath("../InteractButton")
+
+[node name="HoverComponent" parent="." node_paths=PackedStringArray("drag_button") instance=ExtResource("7_a84gg")]
+layout_mode = 1
+drag_button = NodePath("../InteractButton")
+
+[node name="DestroyArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DestroyArea"]
+position = Vector2(34.5, 52.5)
+shape = SubResource("RectangleShape2D_jq80f")
+
+[node name="TitleLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -32.0
+offset_right = 72.0
+offset_bottom = -5.0
+theme = SubResource("Theme_bnust")
+theme_type_variation = &"HeaderMedium"
+horizontal_alignment = 1
+vertical_alignment = 2
+clip_text = true
+uppercase = true
+
+[node name="RotateOrigin" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 35.0
+offset_top = 30.0
+offset_right = 35.0
+offset_bottom = 30.0
+mouse_filter = 2
+
+[node name="CardTexture" type="TextureRect" parent="RotateOrigin"]
+material = SubResource("ShaderMaterial_d8ql3")
+layout_mode = 0
+offset_left = -35.0
+offset_top = -30.0
+offset_right = 34.0
+offset_bottom = 75.0
+pivot_offset = Vector2(34, 53)
+texture = ExtResource("2_vsb4h")
+
+[node name="Shadow" type="TextureRect" parent="RotateOrigin/CardTexture"]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(1, 1, 1, 0.121569)
+show_behind_parent = true
+layout_mode = 0
+offset_top = 7.0
+offset_right = 69.0
+offset_bottom = 112.0
+pivot_offset = Vector2(34, 53)
+texture = ExtResource("2_vsb4h")
+
+[node name="HBoxContainer" type="HFlowContainer" parent="RotateOrigin"]
+layout_direction = 2
+layout_mode = 0
+offset_left = -31.0
+offset_top = 42.0
+offset_right = 30.0
+offset_bottom = 62.0
+theme_override_constants/h_separation = 15
+theme_override_constants/v_separation = 16
+alignment = 1
+last_wrap_alignment = 2
+reverse_fill = true
+
+[node name="EnergyIcon3" parent="RotateOrigin/HBoxContainer" instance=ExtResource("5_iwpef")]
+layout_mode = 2
+
+[node name="EnergyIcon4" parent="RotateOrigin/HBoxContainer" instance=ExtResource("5_iwpef")]
+layout_mode = 2
+
+[node name="EnergyIcon5" parent="RotateOrigin/HBoxContainer" instance=ExtResource("5_iwpef")]
+layout_mode = 2
+
+[node name="EnergyIcon2" parent="RotateOrigin/HBoxContainer" instance=ExtResource("5_iwpef")]
+layout_mode = 2
+
+[node name="InteractButton" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 69.0
+offset_bottom = 105.0
+flat = true

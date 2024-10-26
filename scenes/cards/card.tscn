@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://cuqlavx8xtrbg"]
+
+[ext_resource type="Script" path="res://scripts/card.gd" id="1_ybnx8"]
+[ext_resource type="Texture2D" uid="uid://dgtlswlhyhihw" path="res://assets/blank.png" id="2_vsb4h"]
+[ext_resource type="PackedScene" uid="uid://bc6ih6ak2iblq" path="res://scenes/components/title_component.tscn" id="4_hlrsm"]
+[ext_resource type="PackedScene" uid="uid://p3qojswn2eql" path="res://scenes/components/card_ui_component.tscn" id="5_8xdu7"]
+[ext_resource type="PackedScene" uid="uid://ctmfy1uhxxmgj" path="res://scenes/components/drag_component.tscn" id="6_6hirc"]
+[ext_resource type="PackedScene" uid="uid://mp6mlgob3v33" path="res://scenes/components/hover_component.tscn" id="7_a84gg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jq80f"]
+size = Vector2(57, 93)
+
+[node name="Card" type="Control"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 69.0
+offset_bottom = 105.0
+pivot_offset = Vector2(34, 33)
+mouse_filter = 1
+script = ExtResource("1_ybnx8")
+
+[node name="DragComponent" parent="." node_paths=PackedStringArray("drag_button") instance=ExtResource("6_6hirc")]
+drag_button = NodePath("../InteractButton")
+
+[node name="HoverComponent" parent="." node_paths=PackedStringArray("drag_button") instance=ExtResource("7_a84gg")]
+layout_mode = 1
+drag_button = NodePath("../InteractButton")
+
+[node name="DestroyArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DestroyArea"]
+position = Vector2(34.5, 52.5)
+shape = SubResource("RectangleShape2D_jq80f")
+
+[node name="TitleLabel" parent="." instance=ExtResource("4_hlrsm")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 74.0
+offset_bottom = 56.0
+mouse_filter = 1
+text = ""
+
+[node name="CardUiComponent" parent="." instance=ExtResource("5_8xdu7")]
+mouse_filter = 1
+texture = ExtResource("2_vsb4h")
+
+[node name="InteractButton" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 69.0
+offset_bottom = 105.0
+mouse_filter = 1
+flat = true

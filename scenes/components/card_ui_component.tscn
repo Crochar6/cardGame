@@ -1,0 +1,72 @@
+[gd_scene load_steps=6 format=3 uid="uid://p3qojswn2eql"]
+
+[ext_resource type="Script" path="res://scenes/components/card_ui_component.gd" id="1_tp7ll"]
+[ext_resource type="Shader" path="res://shaders/fake_3D.gdshader" id="1_vb23n"]
+[ext_resource type="Texture2D" uid="uid://dgtlswlhyhihw" path="res://assets/blank.png" id="2_vdjkb"]
+[ext_resource type="PackedScene" uid="uid://bmynt0nrt01by" path="res://scenes/energy_icon.tscn" id="3_8q1wo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d8ql3"]
+resource_local_to_scene = true
+shader = ExtResource("1_vb23n")
+shader_parameter/fov = 90.0
+shader_parameter/cull_back = true
+shader_parameter/y_rot = 0.0
+shader_parameter/x_rot = 0.0
+shader_parameter/inset = 0.0
+
+[node name="CardUi" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 35.0
+offset_top = 30.0
+offset_right = 35.0
+offset_bottom = 30.0
+mouse_filter = 2
+script = ExtResource("1_tp7ll")
+
+[node name="CardTexture" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_d8ql3")
+layout_mode = 0
+offset_left = -35.0
+offset_top = -30.0
+offset_right = 34.0
+offset_bottom = 75.0
+pivot_offset = Vector2(34, 53)
+texture = ExtResource("2_vdjkb")
+
+[node name="Shadow" type="TextureRect" parent="CardTexture"]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(1, 1, 1, 0.23)
+show_behind_parent = true
+layout_mode = 0
+offset_left = 3.97192
+offset_top = 6.0
+offset_right = 72.9722
+offset_bottom = 111.0
+pivot_offset = Vector2(34, 53)
+texture = ExtResource("2_vdjkb")
+
+[node name="HBoxContainer" type="HFlowContainer" parent="."]
+layout_direction = 2
+layout_mode = 0
+offset_left = -31.0
+offset_top = 42.0
+offset_right = 30.0
+offset_bottom = 62.0
+theme_override_constants/h_separation = 15
+theme_override_constants/v_separation = 16
+alignment = 1
+last_wrap_alignment = 2
+reverse_fill = true
+
+[node name="EnergyIcon3" parent="HBoxContainer" instance=ExtResource("3_8q1wo")]
+layout_mode = 2
+
+[node name="EnergyIcon4" parent="HBoxContainer" instance=ExtResource("3_8q1wo")]
+layout_mode = 2
+
+[node name="EnergyIcon5" parent="HBoxContainer" instance=ExtResource("3_8q1wo")]
+layout_mode = 2
+
+[node name="EnergyIcon2" parent="HBoxContainer" instance=ExtResource("3_8q1wo")]
+layout_mode = 2

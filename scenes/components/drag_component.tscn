@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctmfy1uhxxmgj"]
+
+[ext_resource type="Script" path="res://scripts/drag_component.gd" id="1_sxubc"]
+
+[node name="DragComponent" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 1
+script = ExtResource("1_sxubc")

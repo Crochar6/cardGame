@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://bc6ih6ak2iblq"]
+
+[ext_resource type="Theme" uid="uid://ci41gms2wwk2h" path="res://fonts/FontTheme.tres" id="1_lg031"]
+
+[node name="TitleLabel" type="Label"]
+offset_left = -2.0
+offset_top = -77.0
+offset_right = 72.0
+offset_bottom = -21.0
+theme = ExtResource("1_lg031")
+theme_type_variation = &"HeaderMedium"
+text = "Card name"
+horizontal_alignment = 1
+vertical_alignment = 2
+autowrap_mode = 3
+clip_text = true
+uppercase = true

@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmynt0nrt01by"]
+
+[ext_resource type="Texture2D" uid="uid://bx3h0bcqctia0" path="res://assets/energy_icon.png" id="1_82ek7"]
+
+[node name="EnergyIcon" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 4
+
+[node name="Sprite" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -8.0
+offset_top = -7.0
+offset_right = 8.0
+offset_bottom = 9.0
+texture = ExtResource("1_82ek7")
