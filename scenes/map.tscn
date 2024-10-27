@@ -1,17 +1,19 @@
-[gd_scene load_steps=17 format=3 uid="uid://bdwcebw622rfh"]
+[gd_scene load_steps=23 format=3 uid="uid://bdwcebw622rfh"]
 
+[ext_resource type="Script" path="res://scenes/game.gd" id="1_41f1n"]
 [ext_resource type="Theme" uid="uid://ci41gms2wwk2h" path="res://fonts/FontTheme.tres" id="1_hqwda"]
 [ext_resource type="Shader" path="res://shaders/vhs_crt.gdshader" id="2_2r7qw"]
 [ext_resource type="Texture2D" uid="uid://blhh8fpegpbkj" path="res://assets/button_green.png" id="2_3ywuu"]
-[ext_resource type="PackedScene" uid="uid://dw6uh7s6ql50o" path="res://scenes/cards/laser_shot.tscn" id="3_133jg"]
 [ext_resource type="Texture2D" uid="uid://peof2nnopffl" path="res://assets/ship_deck.png" id="3_cic48"]
 [ext_resource type="Texture2D" uid="uid://c6fwbroi0mfh8" path="res://assets/button_red.png" id="3_pyxqx"]
 [ext_resource type="Texture2D" uid="uid://b2cwitjyd0nnn" path="res://assets/node.png" id="3_xinyb"]
 [ext_resource type="Texture2D" uid="uid://cptdusjdbwcwc" path="res://assets/spaceship.png" id="4_1xl8n"]
+[ext_resource type="PackedScene" uid="uid://cuqlavx8xtrbg" path="res://scenes/cards/card.tscn" id="4_28yfy"]
+[ext_resource type="Script" path="res://scenes/card_holder_area.gd" id="9_ysjql"]
 
 [sub_resource type="Curve" id="Curve_3mw5q"]
-_data = [Vector2(0, 0.692308), 0.0, 1.29524, 0, 0, Vector2(0.485577, 1), 0.0617757, 0.0617757, 0, 0, Vector2(1, 0.472527), -2.38509, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0.651246, 1), 0.0617757, 0.0617757, 0, 0, Vector2(1, 0.472527), -2.38509, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_eupbr"]
 curve = SubResource("Curve_3mw5q")
@@ -39,32 +41,57 @@ turbulence_influence_min = 0.315
 turbulence_influence_max = 0.745
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nyv0q"]
-lifetime_randomness = 0.22
+lifetime_randomness = 0.08
 particle_flag_disable_z = true
-emission_shape = 3
-emission_box_extents = Vector3(450, 400, 0)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 500.0
+emission_ring_radius = 650.0
+emission_ring_inner_radius = 500.0
 angle_min = 1.07288e-05
 angle_max = 1.07288e-05
 spread = 180.0
-initial_velocity_min = 100.0
-initial_velocity_max = 180.0
-angular_velocity_min = -600.0
-angular_velocity_max = 600.0
-orbit_velocity_min = -0.00999991
-orbit_velocity_max = 0.0100001
+initial_velocity_min = 50.0
+initial_velocity_max = 110.0
+angular_velocity_min = -800.0
+angular_velocity_max = 800.0
+orbit_velocity_min = -0.0249999
+orbit_velocity_max = 0.0250001
 radial_velocity_min = -2.23517e-05
 radial_velocity_max = -2.23517e-05
 gravity = Vector3(0, 0, 0)
-damping_min = 15.574
-damping_max = 15.574
-scale_min = 0.8
-scale_max = 4.0
+scale_min = 3.0
+scale_max = 5.0
 scale_curve = SubResource("CurveTexture_eupbr")
-color = Color(5.19812e-06, 0.872522, 0.894498, 1)
+color = Color(0.6675, 0.886292, 0.89, 1)
 turbulence_noise_strength = 0.0
 turbulence_noise_scale = 0.995
 turbulence_influence_min = 0.315
 turbulence_influence_max = 0.745
+sub_emitter_mode = 1
+sub_emitter_frequency = 10.0
+
+[sub_resource type="Curve" id="Curve_42ne3"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.516014, 0.735849), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_8dtur"]
+curve = SubResource("Curve_42ne3")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5c2ht"]
+lifetime_randomness = 0.77
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(4, 4, 1)
+emission_shape = 1
+emission_sphere_radius = 5.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -2.23517e-06
+linear_accel_max = -2.23517e-06
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_8dtur")
+color = Color(0.559, 0.7396, 0.86, 1)
+hue_variation_min = -0.05
+hue_variation_max = 0.05
 
 [sub_resource type="Curve" id="Curve_acuwr"]
 _data = [Vector2(0.197115, 0), 0.0, 0.0519478, 0, 0, Vector2(0.600962, 1), 0.0326529, 0.0326529, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -87,6 +114,9 @@ gravity = Vector3(0, 0, 0)
 alpha_curve = SubResource("CurveTexture_6w4kg")
 hue_variation_min = -0.04
 hue_variation_max = -2.23517e-08
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x2k65"]
+size = Vector2(40, 40)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sbjhn"]
 shader = ExtResource("2_2r7qw")
@@ -115,9 +145,10 @@ shader_parameter/vignette_opacity = 0.005
 [node name="Game" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+script = ExtResource("1_41f1n")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 1
+layout_mode = 0
 offset_left = -29.0
 offset_top = -17.0
 offset_right = 991.0
@@ -125,20 +156,40 @@ offset_bottom = 572.0
 color = Color(0.000485244, 0, 0.0184825, 1)
 metadata/_edit_lock_ = true
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+[node name="PixelateViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 0
+offset_right = 960.0
+offset_bottom = 540.0
+
+[node name="PixelateSubViewport" type="SubViewport" parent="PixelateViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(960, 540)
+render_target_update_mode = 4
+
+[node name="Stars" type="GPUParticles2D" parent="PixelateViewportContainer/PixelateSubViewport"]
 position = Vector2(495, 262)
 amount = 18
 process_material = SubResource("ParticleProcessMaterial_3q5x7")
 lifetime = 9.0
 preprocess = 7.0
 
-[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+[node name="Comets" type="GPUParticles2D" parent="PixelateViewportContainer/PixelateSubViewport"]
 position = Vector2(495, 262)
 amount = 1
-amount_ratio = 0.1
+amount_ratio = 0.08
+sub_emitter = NodePath("../CometTrail")
 process_material = SubResource("ParticleProcessMaterial_nyv0q")
 lifetime = 9.0
 preprocess = 7.0
+
+[node name="CometTrail" type="GPUParticles2D" parent="PixelateViewportContainer/PixelateSubViewport"]
+position = Vector2(114, 35)
+emitting = false
+amount = 300
+process_material = SubResource("ParticleProcessMaterial_5c2ht")
+lifetime = 5.0
+randomness = 0.26
 
 [node name="ShipDeck" type="Sprite2D" parent="."]
 position = Vector2(0, 320)
@@ -201,19 +252,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="Label" type="Label" parent="."]
-visible = false
-layout_mode = 0
-offset_left = 343.0
-offset_top = 232.0
-offset_right = 625.0
-offset_bottom = 287.0
-theme = ExtResource("1_hqwda")
-theme_override_font_sizes/font_size = 50
-text = "Space Cards"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Node" type="Node2D" parent="."]
 position = Vector2(292, 189)
 
@@ -255,13 +293,45 @@ preprocess = 4.0
 position = Vector2(301.5, 174)
 texture = ExtResource("4_1xl8n")
 
+[node name="Node2D" type="Node2D" parent="." groups=["card_drop_area"]]
+visible = false
+position = Vector2(308, 92)
+
+[node name="ColorRect" type="ColorRect" parent="Node2D"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.36, 0.456, 1, 0.537255)
+
+[node name="Area2D" type="Area2D" parent="Node2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Area2D"]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_x2k65")
+
+[node name="HandArea" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 263.0
+offset_top = 415.0
+offset_right = 695.0
+offset_bottom = 478.0
+color = Color(0, 0, 0, 0.215686)
+script = ExtResource("9_ysjql")
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 390.0
+offset_top = 151.0
+offset_right = 586.0
+offset_bottom = 243.0
+color = Color(0, 1, 0.716667, 0.215686)
+
 [node name="Cards" type="Node2D" parent="."]
 
-[node name="LaserShot" parent="Cards" instance=ExtResource("3_133jg")]
-offset_left = 207.0
-offset_top = 147.0
-offset_right = 276.0
-offset_bottom = 252.0
+[node name="Card" parent="Cards" instance=ExtResource("4_28yfy")]
+offset_left = 82.0
+offset_top = 45.0
+offset_right = 151.0
+offset_bottom = 150.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true

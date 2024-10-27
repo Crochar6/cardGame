@@ -4,9 +4,9 @@
 
 [node name="TitleLabel" type="Label"]
 offset_left = -2.0
-offset_top = -77.0
+offset_top = -51.0
 offset_right = 72.0
-offset_bottom = -21.0
+offset_bottom = 5.0
 theme = ExtResource("1_lg031")
 theme_type_variation = &"HeaderMedium"
 text = "Card name"

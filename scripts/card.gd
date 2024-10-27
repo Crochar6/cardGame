@@ -7,6 +7,9 @@ class_name Card
 var energy_cost: int
 var description: String
 
+@onready
+var state_machine: Node = $StateMachine
+
 var angle_x_max: float = deg_to_rad(3.0)
 var angle_y_max: float = deg_to_rad(3.0)
 
@@ -38,9 +41,12 @@ var hover_scale: float = 1.3
 
 @onready var drag_component = $DragComponent
 @onready var hover_component = $HoverComponent
+@onready var area_detect_component = $AreaDetectComponent
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	#state_machine.init(self)
+	
 	drag_component.start_dragging.connect(self.start_following_mouse)
 	drag_component.stop_dragging.connect(self.stop_following_mouse)
 	

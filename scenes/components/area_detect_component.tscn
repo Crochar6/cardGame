@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bp222pqnlwr4k"]
+
+[ext_resource type="Script" path="res://scenes/cards/area_detect_component.gd" id="1_i3dw8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nlwle"]
+size = Vector2(44, 76)
+
+[node name="AreaDetectComponent" type="Area2D"]
+script = ExtResource("1_i3dw8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(34, 52)
+shape = SubResource("RectangleShape2D_nlwle")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

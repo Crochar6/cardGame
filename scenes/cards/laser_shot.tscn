@@ -1,11 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://dw6uh7s6ql50o"]
+[gd_scene load_steps=9 format=3 uid="uid://dw6uh7s6ql50o"]
 
 [ext_resource type="Script" path="res://scenes/cards/card_laser_shot.gd" id="1_efkpt"]
 [ext_resource type="PackedScene" uid="uid://ctmfy1uhxxmgj" path="res://scenes/components/drag_component.tscn" id="2_jbcsr"]
 [ext_resource type="PackedScene" uid="uid://mp6mlgob3v33" path="res://scenes/components/hover_component.tscn" id="3_vcutb"]
 [ext_resource type="PackedScene" uid="uid://bc6ih6ak2iblq" path="res://scenes/components/title_component.tscn" id="4_uj5ia"]
 [ext_resource type="PackedScene" uid="uid://p3qojswn2eql" path="res://scenes/components/card_ui_component.tscn" id="5_tfpvg"]
-[ext_resource type="Texture2D" uid="uid://dgtlswlhyhihw" path="res://assets/blank.png" id="6_rhkwj"]
+[ext_resource type="Texture2D" uid="uid://wegdjbha7lbm" path="res://assets/blank.png" id="6_rhkwj"]
+[ext_resource type="PackedScene" uid="uid://bp222pqnlwr4k" path="res://scenes/components/area_detect_component.tscn" id="7_vp1ff"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jq80f"]
 size = Vector2(57, 93)
@@ -41,9 +42,9 @@ texture = ExtResource("6_rhkwj")
 [node name="TitleLabel" parent="." instance=ExtResource("4_uj5ia")]
 layout_mode = 0
 offset_left = 0.0
-offset_top = -66.0
-offset_right = 68.0
-offset_bottom = -5.0
+offset_top = -45.0
+offset_right = 66.0
+offset_bottom = 16.0
 mouse_filter = 1
 text = "Laser Shot"
 
@@ -54,3 +55,5 @@ offset_right = 69.0
 offset_bottom = 105.0
 mouse_filter = 1
 flat = true
+
+[node name="AreaDetectComponent" parent="." instance=ExtResource("7_vp1ff")]
