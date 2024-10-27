@@ -13,6 +13,7 @@ size = Vector2(57, 93)
 
 [node name="LaserShot" type="Control"]
 self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(71, 107)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 69.0
@@ -51,8 +52,8 @@ text = "Laser Shot"
 [node name="InteractButton" type="Button" parent="."]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
-offset_right = 69.0
-offset_bottom = 105.0
+offset_right = 71.0
+offset_bottom = 107.0
 mouse_filter = 1
 flat = true
 

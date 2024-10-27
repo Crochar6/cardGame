@@ -25,12 +25,14 @@ mouse_filter = 2
 script = ExtResource("1_tp7ll")
 
 [node name="CardTexture" type="TextureRect" parent="."]
+texture_filter = 2
 material = SubResource("ShaderMaterial_d8ql3")
 layout_mode = 0
-offset_left = -35.0
-offset_top = -30.0
-offset_right = 34.0
-offset_bottom = 75.0
+offset_left = -61.0
+offset_top = -70.0
+offset_right = 223.0
+offset_bottom = 358.0
+scale = Vector2(0.25, 0.25)
 pivot_offset = Vector2(34, 53)
 texture = ExtResource("2_vdjkb")
 

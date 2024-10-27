@@ -36,12 +36,11 @@ var normal_scale: float = 1
 var hover_scale: float = 1.3
 
 @onready var card_ui: Control = $CardUiComponent
-@onready var collision_shape = $DestroyArea
+@onready var collision_shape = $AreaDetectComponent
 @onready var title_label = $TitleLabel
 
 @onready var drag_component = $DragComponent
 @onready var hover_component = $HoverComponent
-@onready var area_detect_component = $AreaDetectComponent
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

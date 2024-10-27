@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cuqlavx8xtrbg"]
+[gd_scene load_steps=9 format=3 uid="uid://cuqlavx8xtrbg"]
 
 [ext_resource type="Script" path="res://scripts/card.gd" id="1_ybnx8"]
 [ext_resource type="Texture2D" uid="uid://wegdjbha7lbm" path="res://assets/blank.png" id="2_vsb4h"]
@@ -9,15 +9,17 @@
 [ext_resource type="Script" path="res://scripts/state_machine.gd" id="7_q65qt"]
 [ext_resource type="PackedScene" uid="uid://bp222pqnlwr4k" path="res://scenes/components/area_detect_component.tscn" id="8_y3ywt"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jq80f"]
-size = Vector2(57, 93)
-
 [node name="Card" type="Control"]
 self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(71, 107)
 layout_mode = 3
-anchors_preset = 0
-offset_right = 69.0
-offset_bottom = 105.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1849.0
+offset_bottom = -973.0
+grow_horizontal = 2
+grow_vertical = 2
 pivot_offset = Vector2(34, 33)
 mouse_filter = 1
 script = ExtResource("1_ybnx8")
@@ -28,12 +30,6 @@ drag_button = NodePath("../InteractButton")
 [node name="HoverComponent" parent="." node_paths=PackedStringArray("drag_button") instance=ExtResource("7_a84gg")]
 layout_mode = 1
 drag_button = NodePath("../InteractButton")
-
-[node name="DestroyArea" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DestroyArea"]
-position = Vector2(34.5, 52.5)
-shape = SubResource("RectangleShape2D_jq80f")
 
 [node name="TitleLabel" parent="." instance=ExtResource("4_hlrsm")]
 layout_mode = 0
@@ -51,8 +47,8 @@ texture = ExtResource("2_vsb4h")
 [node name="InteractButton" type="Button" parent="."]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
-offset_right = 69.0
-offset_bottom = 105.0
+offset_right = 71.0
+offset_bottom = 107.0
 mouse_filter = 1
 flat = true
 

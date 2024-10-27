@@ -5,7 +5,7 @@ extends Control
 func _ready():
 	var card_scene: PackedScene = load("res://scenes/cards/card.tscn")
 	
-	for i in range(6):
+	for i in range(0):
 		var card = card_scene.instantiate()
 		$HandArea.add_card(card)
 	pass # Replace with function body.

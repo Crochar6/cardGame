@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bc6ih6ak2iblq"]
 
-[ext_resource type="Theme" uid="uid://ci41gms2wwk2h" path="res://fonts/FontTheme.tres" id="1_lg031"]
+[ext_resource type="Theme" uid="uid://ci41gms2wwk2h" path="res://fonts/MainTheme.tres" id="1_lg031"]
 
 [node name="TitleLabel" type="Label"]
 offset_left = -2.0
