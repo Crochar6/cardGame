@@ -1,7 +1,9 @@
 @tool
 extends Control
 
-class_name Card
+class_name CardDupe
+
+signal reparent_requested(which_card: CardDupe)
 
 @export var title: String
 var energy_cost: int
@@ -30,7 +32,7 @@ var velocity: Vector2
 var mouse_pos_offset: Vector2
 
 var normal_scale: float = 1
-var hover_scale: float = 1.3
+var hover_scale: float = 1.15
 
 @onready var card_ui: Control = $CardUiComponent
 @onready var collision_shape = $AreaDetectComponent
@@ -39,27 +41,41 @@ var hover_scale: float = 1.3
 @onready var drag_component = $DragComponent
 @onready var hover_component = $HoverComponent
 
+@onready var card_state_machine: CardStateMachine = $StateMachine as CardStateMachine
+@onready var drop_point_detector: Area2D = $DropPointDetector
+
+@onready var targets: Array[Node] = []
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
-	drag_component.start_dragging.connect(self.start_following_mouse)
-	drag_component.stop_dragging.connect(self.stop_following_mouse)
+	#drag_component.start_dragging.connect(self.start_following_mouse)
+	#drag_component.stop_dragging.connect(self.stop_following_mouse)
 	
 	hover_component.hovered.connect(self._hovered)
 	hover_component.start_hovering.connect(self._on_start_hover)
 	hover_component.stop_hovering.connect(self._on_stop_hover)
 	
-	print(self.title)
 	title_label.text = self.title
+	
+	card_state_machine.init(self)
 
+func _input(event: InputEvent) -> void:
+	card_state_machine.on_input(event)
+
+func _on_gui_input(event: InputEvent) -> void:
+	card_state_machine.on_gui_input(event)
+	
+func _on_mouse_entered() -> void:
+	card_state_machine.on_mouse_entered()
+
+func _on_mouse_exited() -> void:
+	card_state_machine.on_mouse_exited()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	follow_mouse(delta)
+	#follow_mouse(delta)
 	rotate_velocity(delta)
-	
-	if Engine.is_editor_hint():
-		title_label.text = self.title
 	
 
 func rotate_velocity(delta: float) -> void:
@@ -125,3 +141,13 @@ func _on_stop_hover():
 func kill_tween_if_exists(tween: Tween):
 	if tween and tween.is_running():
 		tween.kill()
+
+
+func _on_drop_point_detector_area_entered(area):
+	print('area')
+	if not targets.has(area):
+		targets.append(area)
+
+
+func _on_drop_point_detector_area_exited(area):
+	targets.erase(area)

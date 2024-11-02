@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cuqlavx8xtrbg"]
+[gd_scene load_steps=8 format=3 uid="uid://cuqlavx8xtrbg"]
 
 [ext_resource type="Script" path="res://scripts/card.gd" id="1_ybnx8"]
 [ext_resource type="Texture2D" uid="uid://wegdjbha7lbm" path="res://assets/blank.png" id="2_vsb4h"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://p3qojswn2eql" path="res://scenes/components/card_ui_component.tscn" id="5_8xdu7"]
 [ext_resource type="PackedScene" uid="uid://ctmfy1uhxxmgj" path="res://scenes/components/drag_component.tscn" id="6_6hirc"]
 [ext_resource type="PackedScene" uid="uid://mp6mlgob3v33" path="res://scenes/components/hover_component.tscn" id="7_a84gg"]
-[ext_resource type="Script" path="res://scripts/state_machine.gd" id="7_q65qt"]
 [ext_resource type="PackedScene" uid="uid://bp222pqnlwr4k" path="res://scenes/components/area_detect_component.tscn" id="8_y3ywt"]
 
 [node name="Card" type="Control"]
@@ -51,8 +50,5 @@ offset_right = 71.0
 offset_bottom = 107.0
 mouse_filter = 1
 flat = true
-
-[node name="StateMachine" type="Node" parent="."]
-script = ExtResource("7_q65qt")
 
 [node name="AreaDetectComponent" parent="." instance=ExtResource("8_y3ywt")]

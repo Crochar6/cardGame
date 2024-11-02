@@ -17,10 +17,6 @@ shader_parameter/inset = 0.0
 [node name="CardUi" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 35.0
-offset_top = 30.0
-offset_right = 35.0
-offset_bottom = 30.0
 mouse_filter = 2
 script = ExtResource("1_tp7ll")
 
@@ -28,12 +24,9 @@ script = ExtResource("1_tp7ll")
 texture_filter = 2
 material = SubResource("ShaderMaterial_d8ql3")
 layout_mode = 0
-offset_left = -61.0
-offset_top = -70.0
-offset_right = 223.0
-offset_bottom = 358.0
+offset_right = 284.0
+offset_bottom = 428.0
 scale = Vector2(0.25, 0.25)
-pivot_offset = Vector2(34, 53)
 texture = ExtResource("2_vdjkb")
 
 [node name="Shadow" type="TextureRect" parent="CardTexture"]
@@ -51,10 +44,10 @@ texture = ExtResource("2_vdjkb")
 [node name="HBoxContainer" type="HFlowContainer" parent="."]
 layout_direction = 2
 layout_mode = 0
-offset_left = -31.0
-offset_top = 44.0
-offset_right = 30.0
-offset_bottom = 64.0
+offset_left = 5.0
+offset_top = 76.0
+offset_right = 66.0
+offset_bottom = 96.0
 theme_override_constants/h_separation = 9
 theme_override_constants/v_separation = 16
 alignment = 1
