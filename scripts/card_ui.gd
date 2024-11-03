@@ -1,9 +1,11 @@
 @tool
 extends Control
 
-class_name Card
+class_name CardUI
 
-signal reparent_requested(which_card: Card)
+signal reparent_requested(which_card: CardUI)
+
+@export var card: Card
 
 @export var title: String
 var energy_cost: int
@@ -35,7 +37,6 @@ var normal_scale: float = 1
 var hover_scale: float = 1.15
 
 @onready var card_ui: Control = $CardUiComponent
-@onready var collision_shape = $AreaDetectComponent
 @onready var title_label = $TitleLabel
 
 @onready var drag_component = $DragComponent
@@ -114,7 +115,6 @@ func stop_following_mouse():
 	self.following_mouse = false
 	card_ui.following_mouse = false
 	top_level = false
-	collision_shape.set_deferred("disabled", false)
 	kill_tween_if_exists(tween_handle)
 	tween_handle = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween_handle.tween_property(card_ui, "rotation", 0.0, 0.3)

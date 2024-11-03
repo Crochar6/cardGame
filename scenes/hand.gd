@@ -4,9 +4,9 @@ extends HBoxContainer
 
 func _ready():
 	for child in get_children():
-		var card := child as Card
-		card.reparent_requested.connect(_on_card_reparent_requested)
+		var card_ui := child as CardUI
+		card_ui.reparent_requested.connect(_on_card_reparent_requested)
 	
 
-func _on_card_reparent_requested(child: Card) -> void:
+func _on_card_reparent_requested(child: CardUI) -> void:
 	child.reparent(self)

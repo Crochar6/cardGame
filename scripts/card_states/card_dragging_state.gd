@@ -7,7 +7,7 @@ var minimum_drag_time_elapsed := false
 func enter() -> void:
 	var ui_layer := get_tree().get_first_node_in_group("ui_layer")
 	if ui_layer:
-		card.reparent(ui_layer)
+		card_ui.reparent(ui_layer)
 	
 	minimum_drag_time_elapsed = false
 	var threshold_timer := get_tree().create_timer(DRAG_MINIMUM_THRESHOLD, false)
@@ -19,7 +19,7 @@ func on_input(event: InputEvent) -> void:
 	var confirm = event.is_action_released("left_mouse") or event.is_action_pressed("left_mouse")
 	
 	if mouse_motion:
-		card.global_position = card.get_global_mouse_position() - card.pivot_offset
+		card_ui.global_position = card_ui.get_global_mouse_position() - card_ui.pivot_offset
 		
 	if cancel:
 		transition_requested.emit(self, CardState.State.BASE)
