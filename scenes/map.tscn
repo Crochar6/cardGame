@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://c6fwbroi0mfh8" path="res://assets/button_red.png" id="3_pyxqx"]
 [ext_resource type="Texture2D" uid="uid://b2cwitjyd0nnn" path="res://assets/node.png" id="3_xinyb"]
 [ext_resource type="Texture2D" uid="uid://cptdusjdbwcwc" path="res://assets/spaceship.png" id="4_1xl8n"]
-[ext_resource type="PackedScene" uid="uid://gc7u4sidsw43" path="res://scenes/cards/card_dupe.tscn" id="9_5xo5l"]
+[ext_resource type="PackedScene" uid="uid://gc7u4sidsw43" path="res://scenes/cards/card.tscn" id="9_5xo5l"]
 [ext_resource type="Script" path="res://scenes/hand.gd" id="9_utgec"]
 [ext_resource type="Script" path="res://scenes/card_holder_area.gd" id="9_ysjql"]
 
@@ -277,6 +277,41 @@ position = Vector2(453, 227)
 texture = ExtResource("3_xinyb")
 centered = false
 
+[node name="Enemy" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 245.0
+offset_top = 33.0
+offset_right = 245.0
+offset_bottom = 33.0
+theme = ExtResource("1_hqwda")
+
+[node name="Ship" type="Sprite2D" parent="Enemy"]
+position = Vector2(-27, 19)
+rotation = 1.57079
+texture = ExtResource("4_1xl8n")
+
+[node name="GridContainer" type="GridContainer" parent="Enemy"]
+layout_mode = 0
+offset_right = 83.0
+offset_bottom = 58.0
+columns = 2
+
+[node name="Label2" type="Label" parent="Enemy/GridContainer"]
+layout_mode = 2
+text = "Shields:"
+
+[node name="Label3" type="Label" parent="Enemy/GridContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="Label" type="Label" parent="Enemy/GridContainer"]
+layout_mode = 2
+text = "Health:"
+
+[node name="Label4" type="Label" parent="Enemy/GridContainer"]
+layout_mode = 2
+text = "0"
+
 [node name="Node2" type="Node2D" parent="."]
 position = Vector2(451, 145)
 
@@ -292,11 +327,6 @@ process_material = SubResource("ParticleProcessMaterial_jp327")
 lifetime = 11.0
 preprocess = 4.0
 
-[node name="Ship" type="Sprite2D" parent="."]
-position = Vector2(291, 59)
-rotation = 1.57079
-texture = ExtResource("4_1xl8n")
-
 [node name="Ship2" type="Sprite2D" parent="."]
 position = Vector2(446, 58)
 rotation = 1.57079
@@ -306,6 +336,31 @@ texture = ExtResource("4_1xl8n")
 position = Vector2(614, 55)
 rotation = 1.57079
 texture = ExtResource("4_1xl8n")
+
+[node name="ShipStats" type="GridContainer" parent="."]
+layout_mode = 0
+offset_left = 66.0
+offset_top = 388.0
+offset_right = 149.0
+offset_bottom = 446.0
+theme = ExtResource("1_hqwda")
+columns = 2
+
+[node name="Label2" type="Label" parent="ShipStats"]
+layout_mode = 2
+text = "Shields:"
+
+[node name="Label3" type="Label" parent="ShipStats"]
+layout_mode = 2
+text = "0"
+
+[node name="Label" type="Label" parent="ShipStats"]
+layout_mode = 2
+text = "Health:"
+
+[node name="Label4" type="Label" parent="ShipStats"]
+layout_mode = 2
+text = "0"
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(455, 132)
@@ -326,10 +381,10 @@ color = Color(0, 1, 0.716667, 0.215686)
 
 [node name="HandArea" type="ColorRect" parent="."]
 layout_mode = 0
-offset_left = 263.0
-offset_top = 415.0
-offset_right = 695.0
-offset_bottom = 478.0
+offset_left = 264.0
+offset_top = 442.0
+offset_right = 696.0
+offset_bottom = 505.0
 color = Color(0, 0, 0, 0.215686)
 script = ExtResource("9_ysjql")
 
@@ -342,10 +397,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -680.0
-offset_top = -647.0
-offset_right = -280.0
-offset_bottom = -540.0
+offset_left = -678.0
+offset_top = -679.0
+offset_right = -278.0
+offset_bottom = -572.0
 grow_horizontal = 2
 grow_vertical = 0
 alignment = 1

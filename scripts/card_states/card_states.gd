@@ -8,7 +8,7 @@ signal transition_requested(from: CardState, to: State)
 
 @export var state: State
 
-var card: CardDupe
+var card: Card
 
 func enter() -> void:
 	pass

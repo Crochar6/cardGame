@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://gc7u4sidsw43"]
 
-[ext_resource type="Script" path="res://scripts/card_dupe.gd" id="1_58qhn"]
+[ext_resource type="Script" path="res://scripts/card.gd" id="1_ybnx8"]
 [ext_resource type="PackedScene" uid="uid://ctmfy1uhxxmgj" path="res://scenes/components/drag_component.tscn" id="2_xh4li"]
 [ext_resource type="PackedScene" uid="uid://mp6mlgob3v33" path="res://scenes/components/hover_component.tscn" id="3_wq82u"]
 [ext_resource type="PackedScene" uid="uid://bc6ih6ak2iblq" path="res://scenes/components/title_component.tscn" id="4_0v70f"]
@@ -16,7 +16,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kpfv7"]
 size = Vector2(38, 70)
 
-[node name="CardDupe" type="Control"]
+[node name="Card" type="Control"]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(71, 107)
 layout_mode = 3
@@ -25,7 +25,7 @@ offset_right = 71.0
 offset_bottom = 107.0
 pivot_offset = Vector2(34, 33)
 mouse_filter = 1
-script = ExtResource("1_58qhn")
+script = ExtResource("1_ybnx8")
 
 [node name="DragComponent" parent="." node_paths=PackedStringArray("drag_button") instance=ExtResource("2_xh4li")]
 drag_button = NodePath("../InteractButton")

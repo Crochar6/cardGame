@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://ny1deidgud6o"]
+[gd_scene load_steps=4 format=3 uid="uid://do6drwkh0qnu4"]
 
-[ext_resource type="PackedScene" uid="uid://cuqlavx8xtrbg" path="res://scenes/cards/card.tscn" id="1_808xr"]
+[ext_resource type="PackedScene" uid="uid://gc7u4sidsw43" path="res://scenes/cards/card.tscn" id="1_808xr"]
 [ext_resource type="Shader" path="res://shaders/vhs_crt.gdshader" id="2_qpnqm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5bihg"]
@@ -45,6 +45,7 @@ mouse_filter = 2
 metadata/_edit_lock_ = true
 
 [node name="Card" parent="." instance=ExtResource("1_808xr")]
+layout_mode = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
