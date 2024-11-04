@@ -8,9 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://c6fwbroi0mfh8" path="res://assets/button_red.png" id="3_pyxqx"]
 [ext_resource type="Texture2D" uid="uid://b2cwitjyd0nnn" path="res://assets/node.png" id="3_xinyb"]
 [ext_resource type="Texture2D" uid="uid://cptdusjdbwcwc" path="res://assets/spaceship.png" id="4_1xl8n"]
-[ext_resource type="Script" path="res://scenes/play_button.gd" id="4_sa0x1"]
+[ext_resource type="Script" path="res://scenes/play_button.gd" id="4_blvnk"]
 [ext_resource type="PackedScene" uid="uid://gc7u4sidsw43" path="res://scenes/card_ui.tscn" id="9_5xo5l"]
-[ext_resource type="Script" path="res://scenes/card_holder_area.gd" id="9_78h8l"]
+[ext_resource type="Script" path="res://scenes/hand.gd" id="9_utgec"]
+[ext_resource type="Script" path="res://scenes/card_holder_area.gd" id="9_ysjql"]
 [ext_resource type="Resource" uid="uid://rk5fr1vgprkb" path="res://cards/laser_shot.tres" id="11_72ur5"]
 [ext_resource type="Resource" uid="uid://boejxuq3luxal" path="res://cards/recharge_shields.tres" id="12_mq1sq"]
 
@@ -121,14 +122,11 @@ hue_variation_max = -2.23517e-08
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4cs6b"]
 size = Vector2(130.5, 74)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_77gkn"]
-size = Vector2(148, 91)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bgtwf"]
 size = Vector2(742, 261)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_e0j0f"]
-size = Vector2(422, 83)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_77gkn"]
+size = Vector2(148, 91)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sbjhn"]
 shader = ExtResource("2_2r7qw")
@@ -238,7 +236,7 @@ centered = false
 
 [node name="PlayButton" type="Node2D" parent="."]
 position = Vector2(737, 328)
-script = ExtResource("4_sa0x1")
+script = ExtResource("4_blvnk")
 
 [node name="PlayButton" type="Button" parent="PlayButton"]
 self_modulate = Color(1, 1, 1, 0)
@@ -366,90 +364,65 @@ position = Vector2(6.75, 19)
 shape = SubResource("RectangleShape2D_4cs6b")
 debug_color = Color(0, 0.256667, 0.7, 0.356863)
 
-[node name="Cards" type="Node2D" parent="."]
-
-[node name="BattleUi" type="CanvasLayer" parent="." groups=["ui_layer"]]
-follow_viewport_enabled = true
-
-[node name="DiscardArea" type="Area2D" parent="BattleUi" node_paths=PackedStringArray("container")]
-position = Vector2(828, 439)
-collision_layer = 2
-script = ExtResource("9_78h8l")
-container = NodePath("DiscardContainer")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BattleUi/DiscardArea"]
-position = Vector2(0, 0.5)
-shape = SubResource("RectangleShape2D_77gkn")
-
-[node name="ColorRect2" type="ColorRect" parent="BattleUi/DiscardArea"]
-offset_left = -97.0
-offset_top = -61.0
-offset_right = 100.0
-offset_bottom = 68.0
-mouse_filter = 2
-color = Color(1, 0.15, 0, 0.294118)
-
-[node name="DiscardContainer" type="HBoxContainer" parent="BattleUi/DiscardArea"]
-offset_left = -97.0
-offset_top = -59.0
-offset_right = 98.0
-offset_bottom = 63.0
-alignment = 1
-
-[node name="CardPlayArea" type="Area2D" parent="BattleUi" node_paths=PackedStringArray("container")]
+[node name="CardPlayArea" type="Area2D" parent="."]
 position = Vector2(455, 132)
 collision_layer = 2
-script = ExtResource("9_78h8l")
-container = NodePath("CardPlayContainer")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BattleUi/CardPlayArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CardPlayArea"]
 position = Vector2(29, 58.5)
 shape = SubResource("RectangleShape2D_bgtwf")
 debug_color = Color(0, 0.595, 0.7, 0.0823529)
 metadata/_edit_lock_ = true
 
-[node name="CardPlayContainer" type="HBoxContainer" parent="BattleUi/CardPlayArea"]
-offset_left = -223.0
-offset_top = 89.0
-offset_right = 277.0
-offset_bottom = 196.0
-alignment = 1
-
-[node name="Hand" type="Area2D" parent="BattleUi" node_paths=PackedStringArray("container")]
-position = Vector2(282, 401)
+[node name="DiscardArea" type="Area2D" parent="."]
+position = Vector2(828, 439)
 collision_layer = 2
-script = ExtResource("9_78h8l")
-container = NodePath("HandContainer")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BattleUi/Hand"]
-position = Vector2(200, 57)
-shape = SubResource("RectangleShape2D_e0j0f")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DiscardArea"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_77gkn")
 
-[node name="HandContainer" type="HBoxContainer" parent="BattleUi/Hand"]
+[node name="ColorRect2" type="ColorRect" parent="DiscardArea"]
+offset_left = -97.0
+offset_top = -61.0
+offset_right = 100.0
+offset_bottom = 68.0
+color = Color(1, 0.15, 0, 0.294118)
+
+[node name="Cards" type="Node2D" parent="."]
+
+[node name="HandArea" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 264.0
+offset_top = 442.0
+offset_right = 696.0
+offset_bottom = 505.0
+color = Color(0, 0, 0, 0.215686)
+script = ExtResource("9_ysjql")
+
+[node name="BattleUi" type="CanvasLayer" parent="." groups=["ui_layer"]]
+follow_viewport_enabled = true
+
+[node name="Hand" type="HBoxContainer" parent="BattleUi"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_right = 400.0
-offset_bottom = 107.0
+offset_left = -678.0
+offset_top = -679.0
+offset_right = -278.0
+offset_bottom = -572.0
 grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
+script = ExtResource("9_utgec")
 
-[node name="Card" parent="BattleUi/Hand/HandContainer" instance=ExtResource("9_5xo5l")]
+[node name="Card" parent="BattleUi/Hand" instance=ExtResource("9_5xo5l")]
 layout_mode = 2
 card = ExtResource("11_72ur5")
 
-[node name="Card2" parent="BattleUi/Hand/HandContainer" instance=ExtResource("9_5xo5l")]
-layout_mode = 2
-card = ExtResource("12_mq1sq")
-
-[node name="Card3" parent="BattleUi/Hand/HandContainer" instance=ExtResource("9_5xo5l")]
-layout_mode = 2
-card = ExtResource("11_72ur5")
-
-[node name="Card4" parent="BattleUi/Hand/HandContainer" instance=ExtResource("9_5xo5l")]
+[node name="Card2" parent="BattleUi/Hand" instance=ExtResource("9_5xo5l")]
 layout_mode = 2
 card = ExtResource("12_mq1sq")
 

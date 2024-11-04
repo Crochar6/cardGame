@@ -17,6 +17,9 @@ shader_parameter/inset = 0.0
 [node name="CardUi" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+offset_right = 71.0
+offset_bottom = 107.0
+pivot_offset = Vector2(35, 43)
 mouse_filter = 2
 script = ExtResource("1_tp7ll")
 

@@ -8,12 +8,12 @@ var tween_rot: Tween
 var tween_shadow_height: Tween
 var tween_shadow_opacity: Tween
 
-var max_offset_shadow: float = 0.8
+var max_offset_shadow: float = 5
 var height_shadow_normal: float = 6
-var height_shadow_hover: float = 16
+var height_shadow_hover: float = 26
 
-var opacity_shadow_normal: float = 0.23
-var opacity_shadow_hover: float = 0.12
+var opacity_shadow_normal: float = 0.33
+var opacity_shadow_hover: float = 0.22
 
 var angle_x_max: float = deg_to_rad(4.0)
 var angle_y_max: float = deg_to_rad(4.0)

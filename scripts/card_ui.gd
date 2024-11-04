@@ -3,8 +3,6 @@ extends Control
 
 class_name CardUI
 
-signal reparent_requested(which_card: CardUI)
-
 @export var card: Card
 
 @export var title: String
@@ -47,6 +45,9 @@ var hover_scale: float = 1.15
 
 @onready var targets: Array[Node] = []
 
+var parent: Node
+var tween_position: Tween
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
@@ -73,14 +74,29 @@ func _on_mouse_entered() -> void:
 func _on_mouse_exited() -> void:
 	card_state_machine.on_mouse_exited()
 
+func resolve_played():
+	if card.target == Card.Target.SINGLE_ENEMY:
+		card_state_machine.current_state.transition_requested.emit(card_state_machine.current_state, CardState.State.AIMING)
+
+func set_parent(where):
+	self.parent = where
+	self.reparent(where, false)
+
+func reparent_requested():
+	print(self.parent)
+	self.reparent(self.parent)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	#follow_mouse(delta)
 	rotate_velocity(delta)
 	
+func animate_to_position(new_position: Vector2, duration: float) -> void:
+	kill_tween_if_exists(tween_position)
+	tween_position = create_tween().set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
+	tween_position.tween_property(self, "global_posiition", new_position, duration)
 
 func rotate_velocity(delta: float) -> void:
-	if not following_mouse: return
 	var center_pos: Vector2 = global_position - (size/2.0)
 
 	# Compute the velocity
@@ -103,6 +119,11 @@ func follow_mouse(delta: float) -> void:
 
 	# Adjust the mouse position by this ratio
 	global_position = mouse_pos - mouse_pos_offset
+
+func set_card_pivot_offset(new_pivot: Vector2):
+	self.pivot_offset = new_pivot
+	self.card_ui.pivot_offset = new_pivot
+	
 
 func start_following_mouse():
 	self.following_mouse = true

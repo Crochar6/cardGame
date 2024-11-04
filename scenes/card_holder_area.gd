@@ -1,26 +1,19 @@
-extends ColorRect
+class_name CardHolderArea
+extends Area2D
 
+@export var container: Container
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	for child in container.get_children():
+		var card_ui := child as CardUI
+		card_ui.set_parent(self.container)
+		
+func get_played_cards():
+	var child_cards: Array[CardUI]= []
+	for child in container.get_children():
+		if child is CardUI:
+			child_cards.append(child)
+	return child_cards
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-	
-
-func add_card(card):
-	self.add_child(card)
-	
-	card.position.y = self.get_rect().size.y / 2 - card.size.y/2
-	self.position_cards()
-	
-
-func position_cards():
-	for i in get_children().size():
-		var card = get_child(i)
-		card.position.x = self.get_rect().size.x / (self.get_child_count()+1) * (i+1) - card.size.x/2
-	
-	
+func get_container():
+	return self.container
