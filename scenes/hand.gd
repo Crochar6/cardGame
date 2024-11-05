@@ -1,8 +1,8 @@
 class_name Hand
-extends HBoxContainer
+extends CardHolderArea
 
 
 func _ready():
-	for child in get_children():
+	for child in container.get_children():
 		var card_ui := child as CardUI
-		card_ui.set_parent(self)
+		card_ui.set_parent(self.container)

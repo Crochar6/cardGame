@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bdwcebw622rfh"]
+[gd_scene load_steps=31 format=3 uid="uid://bdwcebw622rfh"]
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_41f1n"]
 [ext_resource type="Theme" uid="uid://ci41gms2wwk2h" path="res://fonts/MainTheme.tres" id="1_hqwda"]
@@ -11,7 +11,9 @@
 [ext_resource type="Script" path="res://scenes/play_button.gd" id="4_sa0x1"]
 [ext_resource type="PackedScene" uid="uid://gc7u4sidsw43" path="res://scenes/card_ui.tscn" id="9_5xo5l"]
 [ext_resource type="Script" path="res://scenes/card_holder_area.gd" id="9_78h8l"]
+[ext_resource type="PackedScene" uid="uid://2j8lc6h5w6sq" path="res://scenes/card_target_selector/card_target_selector.tscn" id="9_dbnj2"]
 [ext_resource type="Resource" uid="uid://rk5fr1vgprkb" path="res://cards/laser_shot.tres" id="11_72ur5"]
+[ext_resource type="Script" path="res://scenes/hand.gd" id="11_c3dne"]
 [ext_resource type="Resource" uid="uid://boejxuq3luxal" path="res://cards/recharge_shields.tres" id="12_mq1sq"]
 
 [sub_resource type="Curve" id="Curve_3mw5q"]
@@ -368,6 +370,8 @@ debug_color = Color(0, 0.256667, 0.7, 0.356863)
 
 [node name="Cards" type="Node2D" parent="."]
 
+[node name="CardTargetSelector" parent="." instance=ExtResource("9_dbnj2")]
+
 [node name="BattleUi" type="CanvasLayer" parent="." groups=["ui_layer"]]
 follow_viewport_enabled = true
 
@@ -418,7 +422,7 @@ alignment = 1
 [node name="Hand" type="Area2D" parent="BattleUi" node_paths=PackedStringArray("container")]
 position = Vector2(282, 401)
 collision_layer = 2
-script = ExtResource("9_78h8l")
+script = ExtResource("11_c3dne")
 container = NodePath("HandContainer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BattleUi/Hand"]

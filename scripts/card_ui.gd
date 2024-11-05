@@ -23,6 +23,8 @@ var oscillator_velocity: float = 0.0
 var tween_hover: Tween
 var tween_destroy: Tween
 var tween_handle: Tween
+var tween_trigger1: Tween
+var tween_trigger2: Tween
 
 var last_mouse_pos: Vector2
 var mouse_velocity: Vector2
@@ -30,6 +32,8 @@ var following_mouse: bool = false
 var last_pos: Vector2
 var velocity: Vector2
 var mouse_pos_offset: Vector2
+
+var dragable: bool = true
 
 var normal_scale: float = 1
 var hover_scale: float = 1.15
@@ -47,10 +51,10 @@ var hover_scale: float = 1.15
 
 var parent: Node
 var tween_position: Tween
+var pending_callback: Callable = Callable()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
 	#drag_component.start_dragging.connect(self.start_following_mouse)
 	#drag_component.stop_dragging.connect(self.stop_following_mouse)
 	
@@ -59,7 +63,6 @@ func _ready():
 	hover_component.stop_hovering.connect(self._on_stop_hover)
 	
 	title_label.text = self.title
-	
 	card_state_machine.init(self)
 
 func _input(event: InputEvent) -> void:
@@ -74,28 +77,51 @@ func _on_mouse_entered() -> void:
 func _on_mouse_exited() -> void:
 	card_state_machine.on_mouse_exited()
 
-func resolve_played():
+func trigger_animation():
+	kill_tween_if_exists(tween_trigger1)
+	kill_tween_if_exists(tween_trigger2)
+	
+	tween_trigger1 = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_ELASTIC).set_parallel(false)
+	tween_trigger1.tween_property(card_ui, "rotation", 180*7, 1)
+	
+	tween_trigger2 = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
+	tween_trigger2.tween_property(card_ui, "rotation", 0, 1)
+	
+	if self.pending_callback:
+		tween_trigger2.tween_callback(self.pending_callback)
+	
+func resolve_played(callback_next_card: Callable):
+	self.pending_callback = callback_next_card
 	if card.target == Card.Target.SINGLE_ENEMY:
 		card_state_machine.current_state.transition_requested.emit(card_state_machine.current_state, CardState.State.AIMING)
+	else:
+		trigger_animation()
+
+func triggered_on_enemy():
+	trigger_animation()
 
 func set_parent(where):
 	self.parent = where
 	self.reparent(where, false)
 
 func reparent_requested():
-	print(self.parent)
+	if not self.parent:
+		return
 	self.reparent(self.parent)
+
+func set_dragable (dragable: bool):
+	self.dragable = dragable
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	#follow_mouse(delta)
 	rotate_velocity(delta)
+	pass
 	
 func animate_to_position(new_position: Vector2, duration: float) -> void:
-	kill_tween_if_exists(tween_position)
-	tween_position = create_tween().set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
-	tween_position.tween_property(self, "global_posiition", new_position, duration)
-
+	tween_position = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CIRC)
+	tween_position.tween_property(self, "global_position", new_position, duration)
+		
 func rotate_velocity(delta: float) -> void:
 	var center_pos: Vector2 = global_position - (size/2.0)
 
@@ -163,12 +189,9 @@ func kill_tween_if_exists(tween: Tween):
 	if tween and tween.is_running():
 		tween.kill()
 
-
 func _on_drop_point_detector_area_entered(area):
-	print('area')
 	if not targets.has(area):
 		targets.append(area)
-
 
 func _on_drop_point_detector_area_exited(area):
 	targets.erase(area)

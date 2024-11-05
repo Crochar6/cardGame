@@ -4,6 +4,9 @@ extends CardState
 func enter() -> void:
 	if not card_ui.is_node_ready():
 		await card_ui.ready
+		
+	if card_ui.tween_position and card_ui.tween_position.is_running():
+		card_ui.tween_position.kill()
 	
 	card_ui.reparent_requested()
 	#card_ui.pivot_offset = card_ui.size / 2

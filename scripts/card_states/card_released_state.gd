@@ -8,7 +8,11 @@ func enter() -> void:
 		played = true
 		if card_ui.targets.size() > 1:
 			print('MORE THAN ONE TARGET /!\\')
-		card_ui.set_parent(card_ui.targets[0].get_container())
+		if card_ui.targets[0] is CardHolderArea:
+			card_ui.set_parent(card_ui.targets[0].get_container())
+		else:
+			card_ui.triggered_on_enemy()
+			pass
 	
 func on_input(_event: InputEvent) -> void:
 	if played:
