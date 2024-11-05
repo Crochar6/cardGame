@@ -25,12 +25,14 @@ func trigger_next_card():
 		callback = trigger_next_card
 	else:
 		# It's the last card
-		callback = enable_cards
+		callback = on_all_cards_triggered
 	card.resolve_played(callback)
 
-func enable_cards():
+func on_all_cards_triggered():
+	
 	for card in cards:
 		card.set_dragable(true)
+		card.queue_free()
 	
 	
 	

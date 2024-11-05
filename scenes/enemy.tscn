@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://uwxbehdrxg7a"]
+
+[ext_resource type="Script" path="res://scenes/enemy.gd" id="1_2yma5"]
+[ext_resource type="Texture2D" uid="uid://cptdusjdbwcwc" path="res://assets/spaceship.png" id="1_nv8ca"]
+[ext_resource type="Texture2D" uid="uid://bkvaj315vc8aa" path="res://assets/select.png" id="2_c2vrj"]
+[ext_resource type="PackedScene" uid="uid://div6bxvv2l4p3" path="res://scenes/stats_ui.tscn" id="3_0qln8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4cs6b"]
+size = Vector2(130.5, 74)
+
+[node name="Enemy" type="Area2D"]
+collision_layer = 4
+script = ExtResource("1_2yma5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-31, -2)
+rotation = 1.57079
+texture = ExtResource("1_nv8ca")
+
+[node name="Arrow" type="Sprite2D" parent="."]
+position = Vector2(-31, 31)
+texture = ExtResource("2_c2vrj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(6.75, 19)
+shape = SubResource("RectangleShape2D_4cs6b")
+debug_color = Color(0, 0.256667, 0.7, 0.356863)
+
+[node name="StatsUI" parent="." instance=ExtResource("3_0qln8")]
+offset_left = 3.0
+offset_top = -26.0
+offset_right = 273.0
+offset_bottom = 66.0

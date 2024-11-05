@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bdwcebw622rfh"]
+[gd_scene load_steps=33 format=3 uid="uid://bdwcebw622rfh"]
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_41f1n"]
 [ext_resource type="Theme" uid="uid://ci41gms2wwk2h" path="res://fonts/MainTheme.tres" id="1_hqwda"]
@@ -7,14 +7,17 @@
 [ext_resource type="Texture2D" uid="uid://peof2nnopffl" path="res://assets/ship_deck.png" id="3_cic48"]
 [ext_resource type="Texture2D" uid="uid://c6fwbroi0mfh8" path="res://assets/button_red.png" id="3_pyxqx"]
 [ext_resource type="Texture2D" uid="uid://b2cwitjyd0nnn" path="res://assets/node.png" id="3_xinyb"]
-[ext_resource type="Texture2D" uid="uid://cptdusjdbwcwc" path="res://assets/spaceship.png" id="4_1xl8n"]
 [ext_resource type="Script" path="res://scenes/play_button.gd" id="4_sa0x1"]
+[ext_resource type="PackedScene" uid="uid://uwxbehdrxg7a" path="res://scenes/enemy.tscn" id="8_381of"]
 [ext_resource type="PackedScene" uid="uid://gc7u4sidsw43" path="res://scenes/card_ui.tscn" id="9_5xo5l"]
 [ext_resource type="Script" path="res://scenes/card_holder_area.gd" id="9_78h8l"]
 [ext_resource type="PackedScene" uid="uid://2j8lc6h5w6sq" path="res://scenes/card_target_selector/card_target_selector.tscn" id="9_dbnj2"]
+[ext_resource type="Resource" uid="uid://cd2xl15pfuw7c" path="res://enemies/test_enemy.tres" id="9_xapnk"]
 [ext_resource type="Resource" uid="uid://rk5fr1vgprkb" path="res://cards/laser_shot.tres" id="11_72ur5"]
 [ext_resource type="Script" path="res://scenes/hand.gd" id="11_c3dne"]
+[ext_resource type="Resource" uid="uid://cgyusdbidbh5l" path="res://player/green_ship.tres" id="12_3nyru"]
 [ext_resource type="Resource" uid="uid://boejxuq3luxal" path="res://cards/recharge_shields.tres" id="12_mq1sq"]
+[ext_resource type="PackedScene" uid="uid://ck2yd32bq2sfh" path="res://scenes/player.tscn" id="16_utany"]
 
 [sub_resource type="Curve" id="Curve_3mw5q"]
 _data = [Vector2(0.651246, 1), 0.0617757, 0.0617757, 0, 0, Vector2(1, 0.472527), -2.38509, 0.0, 0, 0]
@@ -120,17 +123,14 @@ alpha_curve = SubResource("CurveTexture_6w4kg")
 hue_variation_min = -0.04
 hue_variation_max = -2.23517e-08
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4cs6b"]
-size = Vector2(130.5, 74)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_77gkn"]
 size = Vector2(148, 91)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bgtwf"]
-size = Vector2(742, 261)
+size = Vector2(742, 282)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e0j0f"]
-size = Vector2(422, 83)
+size = Vector2(366, 83)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sbjhn"]
 shader = ExtResource("2_2r7qw")
@@ -207,31 +207,6 @@ amount = 300
 process_material = SubResource("ParticleProcessMaterial_5c2ht")
 lifetime = 5.0
 randomness = 0.26
-
-[node name="ShipStats" type="GridContainer" parent="."]
-layout_mode = 0
-offset_left = 66.0
-offset_top = 388.0
-offset_right = 149.0
-offset_bottom = 446.0
-theme = ExtResource("1_hqwda")
-columns = 2
-
-[node name="Label2" type="Label" parent="ShipStats"]
-layout_mode = 2
-text = "Shields:"
-
-[node name="Label3" type="Label" parent="ShipStats"]
-layout_mode = 2
-text = "0"
-
-[node name="Label" type="Label" parent="ShipStats"]
-layout_mode = 2
-text = "Health:"
-
-[node name="Label4" type="Label" parent="ShipStats"]
-layout_mode = 2
-text = "0"
 
 [node name="ShipDeck" type="Sprite2D" parent="."]
 position = Vector2(0, 320)
@@ -330,47 +305,17 @@ position = Vector2(453, 227)
 texture = ExtResource("3_xinyb")
 centered = false
 
-[node name="Enemy" type="Node2D" parent="."]
-position = Vector2(459, 39)
-
-[node name="Ship" type="Sprite2D" parent="Enemy"]
-position = Vector2(-27, 19)
-rotation = 1.57079
-texture = ExtResource("4_1xl8n")
-
-[node name="GridContainer" type="GridContainer" parent="Enemy"]
-offset_right = 83.0
-offset_bottom = 58.0
-theme = ExtResource("1_hqwda")
-columns = 2
-
-[node name="Label2" type="Label" parent="Enemy/GridContainer"]
-layout_mode = 2
-text = "Shields:"
-
-[node name="Label3" type="Label" parent="Enemy/GridContainer"]
-layout_mode = 2
-text = "0"
-
-[node name="Label" type="Label" parent="Enemy/GridContainer"]
-layout_mode = 2
-text = "Health:"
-
-[node name="Label4" type="Label" parent="Enemy/GridContainer"]
-layout_mode = 2
-text = "0"
-
-[node name="Area2D" type="Area2D" parent="Enemy"]
-collision_layer = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy/Area2D"]
-position = Vector2(6.75, 19)
-shape = SubResource("RectangleShape2D_4cs6b")
-debug_color = Color(0, 0.256667, 0.7, 0.356863)
+[node name="Enemy" parent="." instance=ExtResource("8_381of")]
+position = Vector2(454, 53)
+stats = ExtResource("9_xapnk")
 
 [node name="Cards" type="Node2D" parent="."]
 
 [node name="CardTargetSelector" parent="." instance=ExtResource("9_dbnj2")]
+
+[node name="Player" parent="." instance=ExtResource("16_utany")]
+position = Vector2(134, 376)
+stats = ExtResource("12_3nyru")
 
 [node name="BattleUi" type="CanvasLayer" parent="." groups=["ui_layer"]]
 follow_viewport_enabled = true
@@ -407,16 +352,16 @@ script = ExtResource("9_78h8l")
 container = NodePath("CardPlayContainer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BattleUi/CardPlayArea"]
-position = Vector2(29, 58.5)
+position = Vector2(29, 71)
 shape = SubResource("RectangleShape2D_bgtwf")
 debug_color = Color(0, 0.595, 0.7, 0.0823529)
 metadata/_edit_lock_ = true
 
 [node name="CardPlayContainer" type="HBoxContainer" parent="BattleUi/CardPlayArea"]
-offset_left = -223.0
-offset_top = 89.0
-offset_right = 277.0
-offset_bottom = 196.0
+offset_left = -222.0
+offset_top = 70.0
+offset_right = 278.0
+offset_bottom = 177.0
 alignment = 1
 
 [node name="Hand" type="Area2D" parent="BattleUi" node_paths=PackedStringArray("container")]
@@ -426,7 +371,7 @@ script = ExtResource("11_c3dne")
 container = NodePath("HandContainer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BattleUi/Hand"]
-position = Vector2(200, 57)
+position = Vector2(202, 57)
 shape = SubResource("RectangleShape2D_e0j0f")
 
 [node name="HandContainer" type="HBoxContainer" parent="BattleUi/Hand"]
@@ -435,7 +380,7 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_right = 400.0
+offset_right = 404.0
 offset_bottom = 107.0
 grow_horizontal = 2
 grow_vertical = 0
