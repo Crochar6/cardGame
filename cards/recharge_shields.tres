@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="Card" load_steps=2 format=3 uid="uid://boejxuq3luxal"]
+[gd_resource type="Resource" script_class="Card" load_steps=3 format=3 uid="uid://boejxuq3luxal"]
 
+[ext_resource type="Texture2D" uid="uid://dyjxspuuwnjt" path="res://assets/shield_recharge.png" id="1_1p4fu"]
 [ext_resource type="Script" path="res://scenes/custom_resources/cards/card.gd" id="1_7odd0"]
 
 [resource]
@@ -8,3 +9,4 @@ id = "recharge_shields"
 target = 0
 rarity = 0
 cost = 1
+art = ExtResource("1_1p4fu")

@@ -35,7 +35,7 @@ var mouse_pos_offset: Vector2
 var dragable: bool = true
 
 var normal_scale: float = 1
-var hover_scale: float = 1.15
+var hover_scale: float = 1.2
 
 @onready var card_ui: Control = $CardUiComponent
 @onready var title_label = $TitleLabel

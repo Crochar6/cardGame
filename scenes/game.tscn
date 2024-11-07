@@ -197,7 +197,7 @@ amount = 1
 amount_ratio = 0.08
 sub_emitter = NodePath("../CometTrail")
 process_material = SubResource("ParticleProcessMaterial_nyv0q")
-lifetime = 9.0
+lifetime = 11.0
 preprocess = 7.0
 
 [node name="CometTrail" type="GPUParticles2D" parent="PixelateViewportContainer/PixelateSubViewport"]

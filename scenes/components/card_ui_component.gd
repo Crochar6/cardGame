@@ -1,8 +1,10 @@
 extends Control
 
-@onready var shadow = $CardTexture/Shadow
-@onready var card_texture = $CardTexture
-@export var texture: Texture2D
+@onready var scale_node = $ScaleDown
+
+@onready var background_texture_node : TextureRect = $ScaleDown/BackgroundTexture
+@onready var card_texture_node : TextureRect = $ScaleDown/Texture
+@onready var shadow : TextureRect = $ScaleDown/Shadow
 
 var tween_rot: Tween
 var tween_shadow_height: Tween
@@ -21,19 +23,12 @@ var angle_y_max: float = deg_to_rad(4.0)
 var following_mouse: bool = false
 
 func _ready():
-	card_texture.texture = texture
-	
 	shadow.position.y = height_shadow_normal
 	shadow.self_modulate.a = opacity_shadow_normal
 	
-func _process(delta):
-	handle_shadow(delta)
-	if Engine.is_editor_hint():
-		card_texture.texture = texture
-		
 func set_fake_3d(x_rot: float, y_rot: float):
-	card_texture.material.set_shader_parameter("x_rot", x_rot)
-	card_texture.material.set_shader_parameter("y_rot", y_rot)
+	scale_node.material.set_shader_parameter("x_rot", x_rot)
+	scale_node.material.set_shader_parameter("y_rot", y_rot)
 	
 
 func handle_shadow(delta: float) -> void:
@@ -58,11 +53,11 @@ func handle_shadow(delta: float) -> void:
 func _hovered():
 	# Handles rotation
 	# Get local mouse pos
-	var mouse_pos: Vector2 = card_texture.get_local_mouse_position()
-	var diff: Vector2 = (card_texture.position + card_texture.size) - mouse_pos
+	var mouse_pos: Vector2 = card_texture_node.get_local_mouse_position()
+	var diff: Vector2 = (card_texture_node.position + card_texture_node.size) - mouse_pos
 
-	var lerp_val_x: float = remap(mouse_pos.x, 0.0, card_texture.size.x, 1, 0)
-	var lerp_val_y: float = remap(mouse_pos.y, 0.0, card_texture.size.y, 1, 0)
+	var lerp_val_x: float = remap(mouse_pos.x, 0.0, card_texture_node.size.x, 1, 0)
+	var lerp_val_y: float = remap(mouse_pos.y, 0.0, card_texture_node.size.y, 1, 0)
 	
 
 	var rot_x: float = rad_to_deg(lerp_angle(-angle_x_max, angle_x_max, lerp_val_x))
@@ -77,8 +72,8 @@ func _on_stop_hover():
 	kill_tween_if_exists(tween_rot)
 	tween_rot = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK).set_parallel(true)
 	
-	tween_rot.tween_property(card_texture.material, "shader_parameter/x_rot", 0.0, 0.4)
-	tween_rot.tween_property(card_texture.material, "shader_parameter/y_rot", 0.0, 0.4)
+	tween_rot.tween_property(scale_node.material, "shader_parameter/x_rot", 0.0, 0.4)
+	tween_rot.tween_property(scale_node.material, "shader_parameter/y_rot", 0.0, 0.4)
 	
 	kill_tween_if_exists(tween_shadow_height)
 	tween_shadow_height = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
@@ -88,6 +83,7 @@ func _on_stop_hover():
 	tween_shadow_opacity = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 	tween_shadow_opacity.tween_property(shadow, "self_modulate:a", opacity_shadow_normal, 0.4)
 
+		
 func _on_start_hover():
 	kill_tween_if_exists(tween_shadow_height)
 	tween_shadow_height = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)

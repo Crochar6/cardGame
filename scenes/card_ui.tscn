@@ -1,11 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://gc7u4sidsw43"]
+[gd_scene load_steps=13 format=3 uid="uid://gc7u4sidsw43"]
 
 [ext_resource type="Script" path="res://scripts/card_ui.gd" id="1_h3nbo"]
 [ext_resource type="PackedScene" uid="uid://ctmfy1uhxxmgj" path="res://scenes/components/drag_component.tscn" id="2_wuc2r"]
 [ext_resource type="PackedScene" uid="uid://mp6mlgob3v33" path="res://scenes/components/hover_component.tscn" id="3_qohgg"]
 [ext_resource type="PackedScene" uid="uid://bc6ih6ak2iblq" path="res://scenes/components/title_component.tscn" id="4_6ln8g"]
 [ext_resource type="PackedScene" uid="uid://p3qojswn2eql" path="res://scenes/components/card_ui_component.tscn" id="5_prjq7"]
-[ext_resource type="Texture2D" uid="uid://wegdjbha7lbm" path="res://assets/blank.png" id="6_6aomr"]
 [ext_resource type="Script" path="res://scenes/card_state_machine.gd" id="7_xaysf"]
 [ext_resource type="Script" path="res://scripts/card_states/card_base_state.gd" id="8_lk8g4"]
 [ext_resource type="Script" path="res://scripts/card_states/card_clicked_state.gd" id="9_oaey3"]
@@ -45,7 +44,6 @@ text = ""
 
 [node name="CardUiComponent" parent="." instance=ExtResource("5_prjq7")]
 mouse_filter = 1
-texture = ExtResource("6_6aomr")
 
 [node name="InteractButton" type="Button" parent="."]
 self_modulate = Color(1, 1, 1, 0)

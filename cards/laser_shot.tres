@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="Card" load_steps=2 format=3 uid="uid://rk5fr1vgprkb"]
+[gd_resource type="Resource" script_class="Card" load_steps=3 format=3 uid="uid://rk5fr1vgprkb"]
 
+[ext_resource type="Texture2D" uid="uid://lx1eft5dxpbp" path="res://assets/laser_shot.png" id="1_34d5j"]
 [ext_resource type="Script" path="res://scenes/custom_resources/cards/card.gd" id="1_ws3yw"]
 
 [resource]
@@ -8,3 +9,4 @@ id = "laser_shot"
 target = 1
 rarity = 0
 cost = 1
+art = ExtResource("1_34d5j")
