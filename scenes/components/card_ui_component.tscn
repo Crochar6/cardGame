@@ -31,8 +31,10 @@ offset_bottom = 107.0
 pivot_offset = Vector2(35, 43)
 mouse_filter = 2
 script = ExtResource("1_tp7ll")
+energy_icon_scene = ExtResource("3_8q1wo")
 
 [node name="ScaleDown" type="Control" parent="."]
+texture_filter = 2
 material = SubResource("ShaderMaterial_yejng")
 layout_mode = 3
 anchors_preset = 0
@@ -53,7 +55,6 @@ pivot_offset = Vector2(34, 53)
 texture = ExtResource("2_vdjkb")
 
 [node name="BackgroundTexture" type="TextureRect" parent="ScaleDown"]
-texture_filter = 2
 use_parent_material = true
 layout_mode = 0
 offset_left = -0.5
@@ -71,7 +72,7 @@ offset_right = 283.5
 offset_bottom = 427.5
 texture = ExtResource("4_aqrw0")
 
-[node name="HBoxContainer" type="HFlowContainer" parent="."]
+[node name="EnergyCostContainer" type="HFlowContainer" parent="."]
 material = SubResource("ShaderMaterial_7xgsk")
 use_parent_material = true
 layout_direction = 2
@@ -80,20 +81,21 @@ offset_left = 5.0
 offset_top = -29.0
 offset_right = 66.0
 offset_bottom = -9.0
+mouse_filter = 2
 theme_override_constants/h_separation = 9
 theme_override_constants/v_separation = 16
 alignment = 1
 last_wrap_alignment = 2
 reverse_fill = true
 
-[node name="EnergyIcon3" parent="HBoxContainer" instance=ExtResource("3_8q1wo")]
+[node name="EnergyIcon3" parent="EnergyCostContainer" instance=ExtResource("3_8q1wo")]
 layout_mode = 2
 
-[node name="EnergyIcon4" parent="HBoxContainer" instance=ExtResource("3_8q1wo")]
+[node name="EnergyIcon4" parent="EnergyCostContainer" instance=ExtResource("3_8q1wo")]
 layout_mode = 2
 
-[node name="EnergyIcon5" parent="HBoxContainer" instance=ExtResource("3_8q1wo")]
+[node name="EnergyIcon5" parent="EnergyCostContainer" instance=ExtResource("3_8q1wo")]
 layout_mode = 2
 
-[node name="EnergyIcon2" parent="HBoxContainer" instance=ExtResource("3_8q1wo")]
+[node name="EnergyIcon2" parent="EnergyCostContainer" instance=ExtResource("3_8q1wo")]
 layout_mode = 2

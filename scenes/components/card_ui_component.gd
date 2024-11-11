@@ -5,6 +5,8 @@ extends Control
 @onready var background_texture_node : TextureRect = $ScaleDown/BackgroundTexture
 @onready var card_texture_node : TextureRect = $ScaleDown/Texture
 @onready var shadow : TextureRect = $ScaleDown/Shadow
+@export var energy_icon_scene : PackedScene
+@onready var energy_cost_container: Container = $EnergyCostContainer
 
 var tween_rot: Tween
 var tween_shadow_height: Tween
@@ -22,6 +24,12 @@ var angle_y_max: float = deg_to_rad(4.0)
 
 var following_mouse: bool = false
 
+func set_playable(value: bool):
+	if value:
+		self.modulate.a = 1
+	else:
+		self.modulate.a = 0.4
+
 func _ready():
 	shadow.position.y = height_shadow_normal
 	shadow.self_modulate.a = opacity_shadow_normal
@@ -30,6 +38,16 @@ func set_fake_3d(x_rot: float, y_rot: float):
 	scale_node.material.set_shader_parameter("x_rot", x_rot)
 	scale_node.material.set_shader_parameter("y_rot", y_rot)
 	
+func set_energy_cost(cost: int):
+	for n in energy_cost_container.get_children():
+		energy_cost_container.remove_child(n)
+		n.queue_free() 
+	for i in range(cost):
+		var energy_symbol = energy_icon_scene.instantiate()
+		energy_cost_container.add_child(energy_symbol)
+
+func set_foreground_texture(art: Texture2D):
+	card_texture_node.texture = art
 
 func handle_shadow(delta: float) -> void:
 	# Replace with the actual path to your Camera2D node

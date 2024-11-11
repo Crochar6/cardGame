@@ -1,8 +1,8 @@
+class_name CardUI
 extends Control
 
-class_name CardUI
-
-@export var card: Card
+@export var card: Card: set = _set_card
+@export var char_stats: CharacterStats : set = _set_char_stats
 
 @export var title: String
 var energy_cost: int
@@ -48,6 +48,10 @@ var hover_scale: float = 1.2
 
 @onready var targets: Array[Node] = []
 
+var playable := true : set = _set_playable
+var disabled := false
+var queued_play := false
+
 var parent: Node
 var tween_position: Tween
 var pending_callback: Callable = Callable()
@@ -56,6 +60,11 @@ var pending_callback: Callable = Callable()
 func _ready():
 	#drag_component.start_dragging.connect(self.start_following_mouse)
 	#drag_component.stop_dragging.connect(self.stop_following_mouse)
+	
+	Events.card_aim_started.connect(_on_card_drag_or_aiming_started)
+	Events.card_drag_started.connect(_on_card_drag_or_aiming_started)
+	Events.card_aim_ended.connect(_on_card_drag_or_aiming_ended)
+	Events.card_drag_ended.connect(_on_card_drag_or_aiming_ended)
 	
 	hover_component.hovered.connect(self._hovered)
 	hover_component.start_hovering.connect(self._on_start_hover)
@@ -76,6 +85,13 @@ func _on_mouse_entered() -> void:
 func _on_mouse_exited() -> void:
 	card_state_machine.on_mouse_exited()
 
+func _set_card(value: Card):
+	if not is_node_ready():
+		await ready
+	card = value
+	card_ui.set_energy_cost(card.cost)
+	card_ui.set_foreground_texture(card.art)
+
 func trigger_animation():
 	kill_tween_if_exists(tween_trigger1)
 	kill_tween_if_exists(tween_trigger2)
@@ -88,16 +104,57 @@ func trigger_animation():
 	
 	if self.pending_callback:
 		tween_trigger2.tween_callback(self.pending_callback)
+
+func _play_effect() -> void:
+	if not card:
+		print("HAD NO CARD ON PLAY card_ui.gd")
+		return
 	
+	card.play(targets, char_stats)
+
 func resolve_played(callback_next_card: Callable):
 	self.pending_callback = callback_next_card
 	if card.target == Card.Target.SINGLE_ENEMY:
 		card_state_machine.current_state.transition_requested.emit(card_state_machine.current_state, CardState.State.AIMING)
 	else:
-		trigger_animation()
+		triggered_on_enemy()
+
+func queue_play():
+	queued_play = true
+	self.card.use_resources(char_stats)
+
+func dequeue_play():
+	queued_play = false
+	self.card.undo_use_resources(char_stats)
 
 func triggered_on_enemy():
 	trigger_animation()
+	_play_effect()
+
+func _set_playable(value: bool):
+	playable = value
+	card_ui.set_playable(playable)
+
+func _set_char_stats(value: CharacterStats) -> void:
+	char_stats = value
+	char_stats.stats_changed.connect(_on_char_stats_changed)
+
+func _on_card_drag_or_aiming_started(used_card: CardUI):
+	if used_card == self:
+		return
+	disabled = true
+
+func _on_card_drag_or_aiming_ended(used_card: CardUI):
+	# REALMENT CAL? NO S'ACTIVA JA A ON CHAR STATS SCHANGED?
+	disabled = false
+	if used_card == self:
+		pass
+	if not queued_play:
+		self.playable = char_stats.can_play_card(card)
+
+func _on_char_stats_changed() -> void:
+	if not queued_play:
+		self.playable = char_stats.can_play_card(card)
 
 func set_parent(where):
 	self.parent = where

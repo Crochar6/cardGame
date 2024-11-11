@@ -2,13 +2,10 @@ class_name CardHolderArea
 extends Area2D
 
 @export var container: Container
+@export var is_play_area: bool
 
-func _ready():
-	for child in container.get_children():
-		var card_ui := child as CardUI
-		card_ui.set_parent(self.container)
-		
-func get_played_cards():
+
+func get_played_cards() -> Array[CardUI]:
 	var child_cards: Array[CardUI]= []
 	for child in container.get_children():
 		if child is CardUI:

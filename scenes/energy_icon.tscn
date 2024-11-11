@@ -6,6 +6,7 @@
 layout_mode = 3
 anchors_preset = 0
 size_flags_horizontal = 4
+mouse_filter = 1
 
 [node name="Sprite" type="TextureRect" parent="."]
 layout_mode = 0
@@ -13,4 +14,5 @@ offset_left = -5.0
 offset_top = -5.0
 offset_right = 4.0
 offset_bottom = 4.0
+mouse_filter = 2
 texture = ExtResource("1_82ek7")

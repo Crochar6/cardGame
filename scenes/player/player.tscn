@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://ck2yd32bq2sfh"]
 
 [ext_resource type="Texture2D" uid="uid://cptdusjdbwcwc" path="res://assets/spaceship.png" id="1_bqwfq"]
-[ext_resource type="Script" path="res://scenes/player.gd" id="1_h1xwf"]
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_h1xwf"]
 [ext_resource type="PackedScene" uid="uid://div6bxvv2l4p3" path="res://scenes/stats_ui.tscn" id="2_7bmpl"]
 
 [node name="Player" type="Node2D" groups=["player"]]
