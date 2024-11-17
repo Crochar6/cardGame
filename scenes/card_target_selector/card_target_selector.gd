@@ -38,8 +38,8 @@ func ease_out_cubic(number: float) -> float:
 	return 1.0 - pow(1.0 - number, 3.0)
 
 func _on_card_aim_started(card: CardUI) -> void:
-	if not card.card.is_single_targeted():
-		print("CARD IS NOT SINGLE TARGET! at card_target_selector ", card)
+	if not card.card.is_targeted():
+		print("CARD IS NOT TARGETED! at card_target_selector ", card)
 		return
 	targeting = true
 	area_2d.monitoring = true

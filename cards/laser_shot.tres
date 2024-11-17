@@ -1,13 +1,15 @@
 [gd_resource type="Resource" load_steps=3 format=3 uid="uid://rk5fr1vgprkb"]
 
-[ext_resource type="Texture2D" uid="uid://lx1eft5dxpbp" path="res://assets/laser_shot.png" id="1_34d5j"]
+[ext_resource type="Texture2D" uid="uid://lx1eft5dxpbp" path="res://assets/cards/laser_shot.png" id="1_34d5j"]
 [ext_resource type="Script" path="res://cards/laser_shot.gd" id="2_6nenv"]
 
 [resource]
 script = ExtResource("2_6nenv")
 id = "laser_shot"
+title = "Laser Shot"
 target = 1
+trigger_num = 1
 rarity = 0
 cost = 1
-tooltip = "[center]Deal 1 damage to a single target.[/center]"
+tooltip = "Deal 1 damage to a single target."
 art = ExtResource("1_34d5j")

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bny0qr2biukrq"]
+
+[ext_resource type="Texture2D" uid="uid://bh6n1j0x5h2v0" path="res://assets/cards/energy_cell.png" id="1_vvdgf"]
+[ext_resource type="Script" path="res://cards/energy_cell.gd" id="2_bpsol"]
+
+[resource]
+script = ExtResource("2_bpsol")
+id = "energy_cell"
+title = "Energy Cell"
+target = 0
+trigger_num = 1
+rarity = 0
+cost = -1
+tooltip = "Generates an energy point."
+has_triger = false
+art = ExtResource("1_vvdgf")

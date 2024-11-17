@@ -49,6 +49,9 @@ func set_energy_cost(cost: int):
 func set_foreground_texture(art: Texture2D):
 	card_texture_node.texture = art
 
+func set_background_texture(rarity: Card.Rarity):
+	background_texture_node.texture = Card.get_bg_by_rarity(rarity)
+
 func handle_shadow(delta: float) -> void:
 	# Replace with the actual path to your Camera2D node
 	var camera: Camera2D = get_viewport().get_camera_2d()
@@ -95,21 +98,21 @@ func _on_stop_hover():
 	
 	kill_tween_if_exists(tween_shadow_height)
 	tween_shadow_height = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
-	tween_shadow_height.tween_property(shadow, "position:y", height_shadow_normal, 0.4)
+	tween_shadow_height.tween_property(shadow, "position:y", height_shadow_normal, 0.1)
 	
 	kill_tween_if_exists(tween_shadow_opacity)
 	tween_shadow_opacity = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
-	tween_shadow_opacity.tween_property(shadow, "self_modulate:a", opacity_shadow_normal, 0.4)
+	tween_shadow_opacity.tween_property(shadow, "self_modulate:a", opacity_shadow_normal, 0.1)
 
 		
 func _on_start_hover():
 	kill_tween_if_exists(tween_shadow_height)
 	tween_shadow_height = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
-	tween_shadow_height.tween_property(shadow, "position:y", height_shadow_hover, 0.4)
+	tween_shadow_height.tween_property(shadow, "position:y", height_shadow_hover, 0.04)
 	
 	kill_tween_if_exists(tween_shadow_opacity)
 	tween_shadow_opacity = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
-	tween_shadow_opacity.tween_property(shadow, "self_modulate:a", opacity_shadow_hover, 0.4)
+	tween_shadow_opacity.tween_property(shadow, "self_modulate:a", opacity_shadow_hover, 0.04)
 	
 func kill_tween_if_exists(tween: Tween):
 	if tween and tween.is_running():

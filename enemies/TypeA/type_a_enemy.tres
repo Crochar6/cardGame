@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EnemyStats" load_steps=3 format=3 uid="uid://cfbdjn1in0yny"]
+
+[ext_resource type="Texture2D" uid="uid://cptdusjdbwcwc" path="res://assets/spaceship.png" id="1_2yvyd"]
+[ext_resource type="Script" path="res://scenes/custom_resources/enemy_stats.gd" id="1_16cc3"]
+
+[resource]
+script = ExtResource("1_16cc3")
+max_hp = 4
+max_sp = 2
+art = ExtResource("1_2yvyd")

@@ -22,7 +22,7 @@ func on_gui_input(event: InputEvent) -> void:
 		transition_requested.emit(self, CardState.State.CLICKED)
 
 func on_mouse_entered() -> void:
-	Events.card_tooltip_requested.emit(card_ui.card.art, card_ui.card.tooltip)
+	Events.card_tooltip_requested.emit(card_ui.card.art, "[center]%s: %s[/center]" % [card_ui.card.title, card_ui.card.tooltip])
 
 func on_mouse_exited() -> void:
 	Events.tooltip_hide_requested.emit()

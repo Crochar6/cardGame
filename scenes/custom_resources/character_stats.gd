@@ -28,4 +28,5 @@ func create_instance() -> Resource:
 	instance.deck = instance.starting_deck.duplicate()
 	instance.draw_pile = CardPile.new()
 	instance.discard = CardPile.new()
+
 	return instance

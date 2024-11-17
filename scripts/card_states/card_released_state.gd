@@ -20,12 +20,14 @@ func enter() -> void:
 			elif not to.is_play_area:
 				if from.is_play_area:
 					# DE-QUEUED
-					card_ui.dequeue_play()
+					# Don't allow to remove from play if it's not legal
+					if not card_ui.dequeue_play():
+						return
 			card_ui.set_parent(to.get_container())
 			
 		else:
 			card_ui.triggered_on_enemy()
-			pass
+			
 
 func exit() -> void:
 	Events.card_drag_ended.emit(card_ui)

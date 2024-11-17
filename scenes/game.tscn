@@ -1,14 +1,17 @@
-[gd_scene load_steps=33 format=3 uid="uid://bdwcebw622rfh"]
+[gd_scene load_steps=40 format=3 uid="uid://bdwcebw622rfh"]
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_41f1n"]
 [ext_resource type="Theme" uid="uid://ci41gms2wwk2h" path="res://fonts/MainTheme.tres" id="1_hqwda"]
 [ext_resource type="Shader" path="res://shaders/vhs_crt.gdshader" id="2_2r7qw"]
 [ext_resource type="Texture2D" uid="uid://peof2nnopffl" path="res://assets/ship_deck.png" id="3_cic48"]
 [ext_resource type="Texture2D" uid="uid://b2cwitjyd0nnn" path="res://assets/node.png" id="3_xinyb"]
+[ext_resource type="Texture2D" uid="uid://c6axvcg5d8fvu" path="res://assets/card_pile.png" id="4_kyiyl"]
+[ext_resource type="Script" path="res://scenes/ui/deck_info.gd" id="4_q84dt"]
+[ext_resource type="Texture2D" uid="uid://bl8fe0u2057fs" path="res://assets/card_pile_discard.png" id="5_qolhf"]
+[ext_resource type="Resource" uid="uid://cfbdjn1in0yny" path="res://enemies/TypeA/type_a_enemy.tres" id="7_vp2qc"]
 [ext_resource type="PackedScene" uid="uid://uwxbehdrxg7a" path="res://scenes/enemy.tscn" id="8_381of"]
 [ext_resource type="Script" path="res://scenes/card_holder_area.gd" id="9_78h8l"]
 [ext_resource type="PackedScene" uid="uid://2j8lc6h5w6sq" path="res://scenes/card_target_selector/card_target_selector.tscn" id="9_dbnj2"]
-[ext_resource type="Resource" uid="uid://cd2xl15pfuw7c" path="res://enemies/test_enemy.tres" id="9_xapnk"]
 [ext_resource type="Script" path="res://scenes/hand.gd" id="11_c3dne"]
 [ext_resource type="Resource" uid="uid://cgyusdbidbh5l" path="res://player/green_ship.tres" id="12_3nyru"]
 [ext_resource type="Script" path="res://scenes/player/player_handler.gd" id="13_cdbrw"]
@@ -100,12 +103,12 @@ emission_sphere_radius = 5.0
 angle_min = -720.0
 angle_max = 720.0
 spread = 180.0
-initial_velocity_max = 22.0
+initial_velocity_max = 19.0
 gravity = Vector3(0, 0, 0)
 linear_accel_min = -2.23517e-06
 linear_accel_max = -2.23517e-06
 damping_min = 6.0
-damping_max = 6.0
+damping_max = 7.0
 scale_max = 2.0
 scale_curve = SubResource("CurveTexture_8dtur")
 color = Color(0.559, 0.7396, 0.86, 1)
@@ -134,11 +137,59 @@ alpha_curve = SubResource("CurveTexture_6w4kg")
 hue_variation_min = -0.04
 hue_variation_max = -2.23517e-08
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l26hw"]
+bg_color = Color(0.71, 0.165667, 0, 0.498039)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u1jw1"]
+bg_color = Color(0.54, 0.08136, 0.0486, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_381k2"]
+bg_color = Color(0.87, 0.22852, 0.1827, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b7v44"]
+bg_color = Color(0.77, 0.18788, 0.1463, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_77gkn"]
-size = Vector2(148, 91)
+size = Vector2(176, 159)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bgtwf"]
-size = Vector2(742, 282)
+size = Vector2(608, 282)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e0j0f"]
 size = Vector2(366, 83)
@@ -146,26 +197,26 @@ size = Vector2(366, 83)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sbjhn"]
 shader = ExtResource("2_2r7qw")
 shader_parameter/overlay = true
-shader_parameter/scanlines_opacity = 0.01
-shader_parameter/scanlines_width = 0.083
-shader_parameter/grille_opacity = 0.008
+shader_parameter/scanlines_opacity = 0.02
+shader_parameter/scanlines_width = 0.2
+shader_parameter/grille_opacity = 0.015
 shader_parameter/resolution = Vector2(1920, 1080)
 shader_parameter/pixelate = false
-shader_parameter/roll = true
+shader_parameter/roll = false
 shader_parameter/roll_speed = 3.0
 shader_parameter/roll_size = 8.306
 shader_parameter/roll_variation = 1.177
 shader_parameter/distort_intensity = 0.001
 shader_parameter/noise_opacity = 0.0
-shader_parameter/noise_speed = 5.0
+shader_parameter/noise_speed = 4.0
 shader_parameter/static_noise_intensity = 0.03
 shader_parameter/aberration = 0.00100005
 shader_parameter/brightness = 1.005
 shader_parameter/discolor = false
-shader_parameter/warp_amount = 0.0
+shader_parameter/warp_amount = 0.04
 shader_parameter/clip_warp = false
-shader_parameter/vignette_intensity = 3.0
-shader_parameter/vignette_opacity = 0.01
+shader_parameter/vignette_intensity = 5.0
+shader_parameter/vignette_opacity = 0.018
 
 [node name="Battle" type="Control"]
 layout_mode = 3
@@ -200,7 +251,7 @@ render_target_update_mode = 4
 position = Vector2(495, 262)
 amount = 27
 process_material = SubResource("ParticleProcessMaterial_3q5x7")
-lifetime = 15.0
+lifetime = 22.0
 preprocess = 7.0
 
 [node name="Comets" type="GPUParticles2D" parent="PixelateViewportContainer/PixelateSubViewport"]
@@ -221,11 +272,49 @@ lifetime = 5.0
 randomness = 0.26
 
 [node name="ShipDeck" type="Sprite2D" parent="."]
-position = Vector2(0, 320)
+position = Vector2(0, 323)
 texture = ExtResource("3_cic48")
 centered = false
 
+[node name="DeckInfo" type="Node2D" parent="."]
+script = ExtResource("4_q84dt")
+
+[node name="Deck" type="Sprite2D" parent="DeckInfo"]
+position = Vector2(216, 442)
+scale = Vector2(2, 2)
+texture = ExtResource("4_kyiyl")
+
+[node name="DeckLabel" type="Label" parent="DeckInfo/Deck"]
+offset_left = -21.5
+offset_top = -15.0
+offset_right = 18.5
+offset_bottom = 8.0
+theme = ExtResource("1_hqwda")
+theme_override_colors/font_color = Color(0.384314, 0.333333, 0.396078, 1)
+theme_override_font_sizes/font_size = 14
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Discards" type="Sprite2D" parent="DeckInfo"]
+position = Vector2(746, 442)
+scale = Vector2(2, 2)
+texture = ExtResource("5_qolhf")
+
+[node name="DiscardLabel" type="Label" parent="DeckInfo/Discards"]
+offset_left = -21.5
+offset_top = -15.0
+offset_right = 18.5
+offset_bottom = 8.0
+theme = ExtResource("1_hqwda")
+theme_override_font_sizes/font_size = 14
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Node" type="Node2D" parent="."]
+visible = false
 position = Vector2(292, 189)
 
 [node name="Sprite" type="Sprite2D" parent="Node"]
@@ -241,6 +330,7 @@ lifetime = 11.0
 preprocess = 4.0
 
 [node name="Node2" type="Node2D" parent="."]
+visible = false
 position = Vector2(451, 145)
 
 [node name="Sprite" type="Sprite2D" parent="Node2"]
@@ -256,6 +346,7 @@ lifetime = 11.0
 preprocess = 4.0
 
 [node name="Node3" type="Node2D" parent="."]
+visible = false
 position = Vector2(453, 227)
 
 [node name="Sprite" type="Sprite2D" parent="Node3"]
@@ -264,14 +355,14 @@ centered = false
 
 [node name="Enemy" parent="." instance=ExtResource("8_381of")]
 position = Vector2(454, 53)
-stats = ExtResource("9_xapnk")
+stats = ExtResource("7_vp2qc")
 
 [node name="Cards" type="Node2D" parent="."]
 
 [node name="CardTargetSelector" parent="." instance=ExtResource("9_dbnj2")]
 
 [node name="Player" parent="." instance=ExtResource("16_utany")]
-position = Vector2(134, 376)
+position = Vector2(59, 226)
 stats = ExtResource("12_3nyru")
 
 [node name="PlayerHandler" type="Node" parent="." node_paths=PackedStringArray("hand", "discard_area")]
@@ -284,38 +375,56 @@ follow_viewport_enabled = true
 script = ExtResource("13_tntns")
 
 [node name="EndTurnButton" type="Button" parent="BattleUi"]
-offset_left = 774.0
-offset_top = 334.0
-offset_right = 873.0
-offset_bottom = 373.0
+offset_left = 801.0
+offset_top = 403.0
+offset_right = 900.0
+offset_bottom = 442.0
 theme = ExtResource("1_hqwda")
-text = "Play Cards"
+text = "Execute Turn"
 clip_text = true
 
+[node name="ReshuffleButton" type="Button" parent="BattleUi"]
+offset_left = 801.0
+offset_top = 459.0
+offset_right = 900.0
+offset_bottom = 498.0
+theme = ExtResource("1_hqwda")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_l26hw")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_u1jw1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_381k2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_u1jw1")
+theme_override_styles/normal = SubResource("StyleBoxFlat_b7v44")
+text = "Reshuffle"
+
 [node name="DiscardArea" type="Area2D" parent="BattleUi" node_paths=PackedStringArray("container")]
-position = Vector2(828, 439)
+position = Vector2(923, 310)
 collision_layer = 2
 script = ExtResource("9_78h8l")
 container = NodePath("DiscardContainer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BattleUi/DiscardArea"]
-position = Vector2(0, 0.5)
+position = Vector2(-62, -5.5)
 shape = SubResource("RectangleShape2D_77gkn")
 
 [node name="ColorRect2" type="ColorRect" parent="BattleUi/DiscardArea"]
-offset_left = -97.0
+offset_left = -140.0
 offset_top = -61.0
-offset_right = 100.0
 offset_bottom = 68.0
 mouse_filter = 2
-color = Color(1, 0.15, 0, 0.294118)
+color = Color(1, 0.566667, 0, 0.294118)
 
-[node name="DiscardContainer" type="HBoxContainer" parent="BattleUi/DiscardArea"]
-offset_left = -97.0
-offset_top = -59.0
-offset_right = 98.0
-offset_bottom = 63.0
+[node name="DiscardContainer" type="HFlowContainer" parent="BattleUi/DiscardArea"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -151.0
+offset_top = -51.0
+offset_right = 9.0
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
 alignment = 1
+last_wrap_alignment = 2
 
 [node name="CardPlayArea" type="Area2D" parent="BattleUi" node_paths=PackedStringArray("container")]
 position = Vector2(455, 132)
@@ -325,16 +434,16 @@ container = NodePath("CardPlayContainer")
 is_play_area = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BattleUi/CardPlayArea"]
-position = Vector2(29, 71)
+position = Vector2(-37, 71)
 shape = SubResource("RectangleShape2D_bgtwf")
 debug_color = Color(0, 0.595, 0.7, 0.0823529)
 metadata/_edit_lock_ = true
 
 [node name="CardPlayContainer" type="HBoxContainer" parent="BattleUi/CardPlayArea"]
 offset_left = -222.0
-offset_top = 70.0
+offset_top = 47.0
 offset_right = 278.0
-offset_bottom = 177.0
+offset_bottom = 154.0
 alignment = 1
 
 [node name="Hand" type="Area2D" parent="BattleUi" node_paths=PackedStringArray("container")]
@@ -353,23 +462,24 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
+offset_top = -11.0
 offset_right = 404.0
-offset_bottom = 107.0
+offset_bottom = 96.0
 grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
 
 [node name="EnergyUI" parent="BattleUi" instance=ExtResource("18_aq7hw")]
-offset_left = 193.0
-offset_top = 398.0
-offset_right = 243.0
-offset_bottom = 448.0
+offset_left = 84.0
+offset_top = 404.0
+offset_right = 134.0
+offset_bottom = 454.0
 
 [node name="Tooltip" parent="BattleUi" instance=ExtResource("19_pourp")]
-offset_left = 323.0
-offset_top = 316.0
-offset_right = 643.0
-offset_bottom = 381.0
+offset_left = 325.0
+offset_top = 305.0
+offset_right = 645.0
+offset_bottom = 370.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true

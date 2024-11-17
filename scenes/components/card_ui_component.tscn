@@ -4,7 +4,7 @@
 [ext_resource type="Shader" path="res://shaders/fake_3D.gdshader" id="1_vb23n"]
 [ext_resource type="Texture2D" uid="uid://wegdjbha7lbm" path="res://assets/blank.png" id="2_vdjkb"]
 [ext_resource type="PackedScene" uid="uid://bmynt0nrt01by" path="res://scenes/energy_icon.tscn" id="3_8q1wo"]
-[ext_resource type="Texture2D" uid="uid://lx1eft5dxpbp" path="res://assets/laser_shot.png" id="4_aqrw0"]
+[ext_resource type="Texture2D" uid="uid://lx1eft5dxpbp" path="res://assets/cards/laser_shot.png" id="4_aqrw0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yejng"]
 resource_local_to_scene = true
@@ -26,7 +26,6 @@ shader_parameter/inset = 0.0
 [node name="CardUiComponent" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 71.0
 offset_bottom = 107.0
 pivot_offset = Vector2(35, 43)
 mouse_filter = 2

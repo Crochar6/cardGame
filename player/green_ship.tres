@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="CharacterStats" load_steps=3 format=3 uid="uid://cgyusdbidbh5l"]
+[gd_resource type="Resource" script_class="CharacterStats" load_steps=4 format=3 uid="uid://cgyusdbidbh5l"]
 
+[ext_resource type="Texture2D" uid="uid://cptdusjdbwcwc" path="res://assets/spaceship.png" id="1_23smg"]
 [ext_resource type="Script" path="res://scenes/custom_resources/character_stats.gd" id="1_qibax"]
 [ext_resource type="Resource" uid="uid://byu0mikgk3mbj" path="res://player/green_starting_deck.tres" id="3_mh1mv"]
 
@@ -7,6 +8,7 @@
 script = ExtResource("1_qibax")
 starting_deck = ExtResource("3_mh1mv")
 cars_per_turn = 5
-max_energy = 2
+max_energy = 3
 max_hp = 6
-max_sp = 1
+max_sp = 5
+art = ExtResource("1_23smg")

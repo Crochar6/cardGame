@@ -1,10 +1,14 @@
-[gd_resource type="Resource" script_class="CardPile" load_steps=5 format=3 uid="uid://byu0mikgk3mbj"]
+[gd_resource type="Resource" script_class="CardPile" load_steps=9 format=3 uid="uid://byu0mikgk3mbj"]
 
 [ext_resource type="Script" path="res://scenes/custom_resources/cards/card.gd" id="1_q1khb"]
 [ext_resource type="Script" path="res://scenes/custom_resources/card_pile.gd" id="2_qqy6d"]
 [ext_resource type="Resource" uid="uid://rk5fr1vgprkb" path="res://cards/laser_shot.tres" id="2_tiw1u"]
 [ext_resource type="Resource" uid="uid://boejxuq3luxal" path="res://cards/recharge_shields.tres" id="3_63axl"]
+[ext_resource type="Resource" uid="uid://c5v0jhhi0ht7d" path="res://cards/reckless_charge.tres" id="4_hh48c"]
+[ext_resource type="Resource" uid="uid://bny0qr2biukrq" path="res://cards/energy_cell.tres" id="5_ycki1"]
+[ext_resource type="Resource" uid="uid://3qdmkilp87w6" path="res://cards/twin_shot.tres" id="6_vi4l1"]
+[ext_resource type="Resource" uid="uid://b4yg7rsmfasjr" path="res://cards/shield_boost.tres" id="7_o24f2"]
 
 [resource]
 script = ExtResource("2_qqy6d")
-cards = Array[ExtResource("1_q1khb")]([ExtResource("2_tiw1u"), ExtResource("2_tiw1u"), ExtResource("2_tiw1u"), ExtResource("2_tiw1u"), ExtResource("2_tiw1u"), ExtResource("3_63axl"), ExtResource("3_63axl"), ExtResource("3_63axl"), ExtResource("3_63axl"), ExtResource("3_63axl")])
+cards = Array[ExtResource("1_q1khb")]([ExtResource("2_tiw1u"), ExtResource("2_tiw1u"), ExtResource("2_tiw1u"), ExtResource("2_tiw1u"), ExtResource("3_63axl"), ExtResource("3_63axl"), ExtResource("4_hh48c"), ExtResource("5_ycki1"), ExtResource("5_ycki1"), ExtResource("6_vi4l1"), ExtResource("6_vi4l1"), ExtResource("7_o24f2")])

@@ -1,13 +1,15 @@
 [gd_resource type="Resource" load_steps=3 format=3 uid="uid://boejxuq3luxal"]
 
-[ext_resource type="Texture2D" uid="uid://dyjxspuuwnjt" path="res://assets/shield_recharge.png" id="1_1p4fu"]
+[ext_resource type="Texture2D" uid="uid://dyjxspuuwnjt" path="res://assets/cards/shield_recharge.png" id="1_1p5jq"]
 [ext_resource type="Script" path="res://cards/recharge_shields.gd" id="2_toosv"]
 
 [resource]
 script = ExtResource("2_toosv")
 id = "recharge_shields"
+title = "Shields Up"
 target = 0
+trigger_num = 1
 rarity = 0
 cost = 2
-tooltip = "[center]Add 1 shield.[/center]"
-art = ExtResource("1_1p4fu")
+tooltip = "Replenish 1 shield."
+art = ExtResource("1_1p5jq")

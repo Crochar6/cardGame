@@ -56,6 +56,8 @@ var parent: Node
 var tween_position: Tween
 var pending_callback: Callable = Callable()
 
+var remaining_triggers: int = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#drag_component.start_dragging.connect(self.start_following_mouse)
@@ -70,7 +72,6 @@ func _ready():
 	hover_component.start_hovering.connect(self._on_start_hover)
 	hover_component.stop_hovering.connect(self._on_stop_hover)
 	
-	title_label.text = self.title
 	card_state_machine.init(self)
 
 func _input(event: InputEvent) -> void:
@@ -91,6 +92,8 @@ func _set_card(value: Card):
 	card = value
 	card_ui.set_energy_cost(card.cost)
 	card_ui.set_foreground_texture(card.art)
+	card_ui.set_background_texture(card.rarity)
+	title_label.text = self.card.title
 
 func trigger_animation():
 	kill_tween_if_exists(tween_trigger1)
@@ -102,19 +105,22 @@ func trigger_animation():
 	tween_trigger2 = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
 	tween_trigger2.tween_property(card_ui, "rotation", 0, 1)
 	
-	if self.pending_callback:
-		tween_trigger2.tween_callback(self.pending_callback)
+	await tween_trigger2.finished
+	return true
+
+func get_player():
+	return get_tree().get_first_node_in_group('player')
 
 func _play_effect() -> void:
 	if not card:
 		print("HAD NO CARD ON PLAY card_ui.gd")
 		return
 	
-	card.play(targets, char_stats)
+	card.play(targets, char_stats, get_player())
 
 func resolve_played(callback_next_card: Callable):
 	self.pending_callback = callback_next_card
-	if card.target == Card.Target.SINGLE_ENEMY:
+	if card.target == Card.Target.ENEMIES:
 		card_state_machine.current_state.transition_requested.emit(card_state_machine.current_state, CardState.State.AIMING)
 	else:
 		triggered_on_enemy()
@@ -122,14 +128,22 @@ func resolve_played(callback_next_card: Callable):
 func queue_play():
 	queued_play = true
 	self.card.use_resources(char_stats)
+	self.remaining_triggers = self.card.trigger_num
 
 func dequeue_play():
-	queued_play = false
-	self.card.undo_use_resources(char_stats)
+	var legal = self.card.undo_use_resources(char_stats)
+	if legal:
+		queued_play = false
+	return legal
 
 func triggered_on_enemy():
-	trigger_animation()
+	remaining_triggers -= 1
 	_play_effect()
+	var return_val = await trigger_animation()
+	if remaining_triggers > 0:
+		resolve_played(self.pending_callback)
+	else:
+		self.pending_callback.call()
 
 func _set_playable(value: bool):
 	playable = value
@@ -230,16 +244,16 @@ func _on_start_hover():
 	
 	# Scale up
 	kill_tween_if_exists(tween_hover)
-	tween_hover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
-	tween_hover.tween_property(self, "scale", Vector2(hover_scale, hover_scale), 0.5)
+	tween_hover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CIRC)
+	tween_hover.tween_property(self, "scale", Vector2(hover_scale, hover_scale), 0.04)
 
 func _on_stop_hover():
 	card_ui._on_stop_hover()
 	
 	# Reset scale
 	kill_tween_if_exists(tween_hover)
-	tween_hover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
-	tween_hover.tween_property(self, "scale", Vector2(normal_scale, normal_scale), 0.4)
+	tween_hover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CIRC)
+	tween_hover.tween_property(self, "scale", Vector2(normal_scale, normal_scale), 0.1)
 
 func kill_tween_if_exists(tween: Tween):
 	if tween and tween.is_running():

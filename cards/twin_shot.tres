@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://3qdmkilp87w6"]
+
+[ext_resource type="Texture2D" uid="uid://xclmt41gdjb5" path="res://assets/cards/twin_shot.png" id="1_syxp7"]
+[ext_resource type="Script" path="res://cards/twin_shot.gd" id="2_m4weo"]
+
+[resource]
+script = ExtResource("2_m4weo")
+id = "twin_shot"
+title = "Twin Shot"
+target = 1
+trigger_num = 2
+rarity = 1
+cost = 2
+tooltip = "Deal 1 damage twice."
+has_triger = true
+art = ExtResource("1_syxp7")

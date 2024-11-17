@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://b4yg7rsmfasjr"]
+
+[ext_resource type="Texture2D" uid="uid://bh2omvogt2sxs" path="res://assets/cards/shield_boost.png" id="1_bm3pj"]
+[ext_resource type="Script" path="res://cards/shield_boost.gd" id="2_1y7ky"]
+
+[resource]
+script = ExtResource("2_1y7ky")
+id = "shield_boost"
+title = "Shield Boost"
+target = 0
+trigger_num = 1
+rarity = 2
+cost = 2
+tooltip = "Shields tank 1 extra damage each this turn."
+has_triger = true
+art = ExtResource("1_bm3pj")

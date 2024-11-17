@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lx1eft5dxpbp"
-path="res://.godot/imported/laser_shot.png-537c56a6b3ddde9377e37573f9797ff2.ctex"
+uid="uid://bh2omvogt2sxs"
+path="res://.godot/imported/shield_boost.png-b6ff3bf33c125a4bf8e9d63eaf0c4a6b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/laser_shot.png"
-dest_files=["res://.godot/imported/laser_shot.png-537c56a6b3ddde9377e37573f9797ff2.ctex"]
+source_file="res://assets/cards/shield_boost.png"
+dest_files=["res://.godot/imported/shield_boost.png-b6ff3bf33c125a4bf8e9d63eaf0c4a6b.ctex"]
 
 [params]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://gc7u4sidsw43"]
+[gd_scene load_steps=14 format=3 uid="uid://gc7u4sidsw43"]
 
 [ext_resource type="Script" path="res://scenes/card_ui/card_ui.gd" id="1_g54oo"]
 [ext_resource type="PackedScene" uid="uid://ctmfy1uhxxmgj" path="res://scenes/components/drag_component.tscn" id="2_5g3ve"]
@@ -11,18 +11,21 @@
 [ext_resource type="Script" path="res://scripts/card_states/card_dragging_state.gd" id="9_4nq8a"]
 [ext_resource type="Script" path="res://scripts/card_states/card_released_state.gd" id="10_n0v7f"]
 [ext_resource type="Script" path="res://scripts/card_states/card_aiming_state.gd" id="11_ybos1"]
+[ext_resource type="Script" path="res://scenes/card_ui/card_released_aim_state.gd" id="12_ujmai"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kpfv7"]
 size = Vector2(38, 70)
 
 [node name="CardUI" type="Control"]
 self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(71, 107)
+custom_minimum_size = Vector2(1, 107)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 71.0
+offset_left = 35.0
+offset_right = 44.0
 offset_bottom = 107.0
-pivot_offset = Vector2(34, 33)
+pivot_offset = Vector2(4, 33)
+size_flags_horizontal = 6
 mouse_filter = 1
 script = ExtResource("1_g54oo")
 
@@ -31,27 +34,35 @@ drag_button = NodePath("../InteractButton")
 
 [node name="HoverComponent" parent="." node_paths=PackedStringArray("drag_button") instance=ExtResource("3_o027e")]
 layout_mode = 1
+offset_right = -8.0
 drag_button = NodePath("../InteractButton")
 
-[node name="TitleLabel" parent="." instance=ExtResource("4_psugh")]
-layout_mode = 0
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 74.0
-offset_bottom = 56.0
-mouse_filter = 1
-text = ""
-
 [node name="CardUiComponent" parent="." instance=ExtResource("5_gp7ux")]
+offset_left = -35.0
+offset_right = -35.0
 mouse_filter = 1
 
 [node name="InteractButton" type="Button" parent="."]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
-offset_right = 71.0
+offset_left = -31.0
+offset_right = 40.0
 offset_bottom = 107.0
 mouse_filter = 1
 flat = true
+
+[node name="TitleLabel" parent="." instance=ExtResource("4_psugh")]
+layout_mode = 0
+offset_left = -35.0
+offset_top = 106.0
+offset_right = 44.0
+offset_bottom = 162.0
+mouse_filter = 1
+theme_override_font_sizes/font_size = 12
+text = "adsad
+"
+vertical_alignment = 0
+uppercase = false
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("6_8wtl3")
@@ -76,12 +87,16 @@ state = 4
 script = ExtResource("11_ybos1")
 state = 3
 
+[node name="CardReleasedAimState" type="Node" parent="StateMachine"]
+script = ExtResource("12_ujmai")
+state = 5
+
 [node name="DropPointDetector" type="Area2D" parent="."]
-visible = false
+position = Vector2(-35, 0)
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DropPointDetector"]
-position = Vector2(34, 52)
+position = Vector2(35.5, 52)
 shape = SubResource("RectangleShape2D_kpfv7")
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]

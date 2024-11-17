@@ -11,8 +11,12 @@ signal card_dequeued(card: Card)
 signal card_tooltip_requested(card: Card)
 signal tooltip_hide_requested
 
+signal card_drawn(card: Card)
+signal card_discarded(card: Card)
+
 # Player-related events
 signal player_hand_drawn
 signal player_hand_discarded
 signal play_cards_ended
 signal player_turn_ended
+signal player_reshuffle

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://c5v0jhhi0ht7d"]
+
+[ext_resource type="Texture2D" uid="uid://cesup2pkosaiu" path="res://assets/cards/reckless_charge.png" id="1_r01u5"]
+[ext_resource type="Script" path="res://cards/reckless_charge.gd" id="2_f2kcu"]
+
+[resource]
+script = ExtResource("2_f2kcu")
+id = "reckless_charge"
+title = "Reckless Charge"
+target = 1
+trigger_num = 1
+rarity = 1
+cost = 2
+tooltip = "Deal 4 damage. Set own shield to 0."
+has_triger = true
+art = ExtResource("1_r01u5")
